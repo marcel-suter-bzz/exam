@@ -115,7 +115,7 @@ class ExamDAO:
             exams_json += data + ','
         exams_json = exams_json[:-1] + ']'
 
-        file = open(current_app.config['DATAPATH'] + 'exams.json', 'w')
+        file = open(current_app.config['DATAPATH'] + 'exams.json', 'w', encoding='UTF-8')
         file.write(exams_json)
         file.close()
 
@@ -126,7 +126,7 @@ class ExamDAO:
         :rtype: none
         """
         person_dao = PersonDAO()
-        file = open(current_app.config['DATAPATH'] + 'exams.json')
+        file = open(current_app.config['DATAPATH'] + 'exams.json', encoding='UTF-8')
         exams = json.load(file)
         for item in exams:
             key = item['exam_uuid']

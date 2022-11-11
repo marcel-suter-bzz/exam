@@ -50,31 +50,41 @@ class EmailService(Resource):
         args = self.parser.parse_args()
         exam_dao = ExamDAO()
         for exam_uuid in args['exam_uuid']:
-            exam = exam_dao.read_exam(exam_uuid[0])
+            uuid = ''
+            if isinstance(exam_uuid, list):
+                for c in exam_uuid:
+                    uuid += c
+            else:
+                uuid = exam_uuid
+            exam = exam_dao.read_exam(uuid)
             if exam is not None:
                 self.create_email(exam, 'invitation')
         return make_response('email sent', 200)
 
-    def create_email(self, exam, type):
+    def create_email(self, exam, status):
         """
         creates an email for the selected exam and type
         :param exam: the unique uuid for an exam
-        :param type: the type of email (missed, ...)
+        :param status: the type of email (missed, ...)
         :return: successful
         """
         event_dao = EventDAO()
         event = event_dao.read_event(exam.event_uuid)
         filename = current_app.config['TEMPLATEPATH']
         subject = ''
-        if type == 'missed':
+        if status == 'pendent':
             filename += 'missed.txt'
             sender = exam.teacher.email
             subject = 'Verpasste Prüfung'
-        elif type == 'invitation':
+        elif status == 'offen':
+            filename += 'missed2.txt'
+            sender = exam.teacher.email
+            subject = 'Verpasste Prüfung'
+        elif status == 'invitation':
             filename += 'invitation.txt'
             sender = event.supervisors[0]
             subject = 'Aufgebot zur Nachprüfung'
-        file = open(filename)
+        file = open(filename, encoding='UTF-8')
         text = file.read()
         data = {'student.firstname': exam.student.firstname,
                 'student.lastname': exam.student.lastname,

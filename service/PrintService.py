@@ -38,7 +38,7 @@ class PrintService(Resource):
         exam_dao = ExamDAO()
         exam = exam_dao.read_exam(exam_uuid)
         filename = current_app.config['TEMPLATEPATH'] + 'sheet.json'
-        file = open(filename)
+        file = open(filename, encoding='UTF-8')
         texts = json.load(file)
         http_status = 404
         if exam is not None:
@@ -51,7 +51,7 @@ class PrintService(Resource):
             response = make_response(pdf.output())
             response.headers["Content-Type"] = "application/pdf"
             return response
-        return make_response('not found', 404)
+        return make_response('not found', http_status)
 
     @token_required
     @teacher_required
@@ -61,23 +61,43 @@ class PrintService(Resource):
         :return: response with path to pdf
         """
         args = self.parser.parse_args()
+        exam_uuids = []
+        for arg in args['exam_uuid']:
+            uuid = ''
+            if isinstance(arg, list):
+                for c in arg:
+                    uuid += c
+            else:
+                uuid = arg
+            exam_uuids.append(uuid)
+
+        response = make_response(
+            self.build_pdf(exam_uuids)
+        )
+        return response
+
+    def build_pdf(self, uuid_list):
+        """
+        builds the pdf for a list of exam-uuids
+        :param uuid_list: exam-uuids
+        :return: uuid of the pdf-file
+        """
         exam_dao = ExamDAO()
         pdf = FPDF()
         pdf.set_font('helvetica', '', 12)
         pdf.set_fill_color(r=192, g=192, b=192)
         pdf.set_line_width(0.5)
         filename = current_app.config['TEMPLATEPATH'] + 'sheet.json'
-        file = open(filename)
+        file = open(filename, encoding='UTF-8')
         texts = json.load(file)
-        for exam_uuid in args['exam_uuid']:
-            exam = exam_dao.read_exam(exam_uuid[0])
+        for exam_uuid in uuid_list:
+            exam = exam_dao.read_exam(exam_uuid)
             if exam is not None:
                 data = self.build_dict(exam)
                 self.make_page(exam, data, texts, pdf)
-        pdf_file = uuid.uuid4().hex + '.pdf'
-        pdf.output(current_app.config['OUTPUTPATH'] + pdf_file)
-        response = make_response(pdf_file)
-        return response
+        pdf_filename = uuid.uuid4().hex + '.pdf'
+        pdf.output(current_app.config['OUTPUTPATH'] + pdf_filename)
+        return pdf_filename
 
     def make_page(self, exam, data, texts, pdf):
         """
@@ -96,8 +116,8 @@ class PrintService(Resource):
                 content = replace_text(data, item['content'])
                 style = ''
                 if item.get('bold') is not None:
-                    style='B'
-                pdf.set_font(style=style)
+                    style = 'B'
+                pdf.set_font(style=style, family='helvetica')
                 pdf.text(xcoord, ycoord, content)
             elif item['type'] == 'line':
                 ycoord -= 3
@@ -112,7 +132,6 @@ class PrintService(Resource):
                     pdf.rect(xcoord, ycoord, width, height)
                 else:
                     pdf.rect(xcoord, ycoord, width, height, style='F', round_corners=True, corner_radius=4)
-
 
     def build_dict(self, exam):
         """
@@ -138,4 +157,3 @@ class PrintService(Resource):
                 'remarks': exam.remarks
                 }
         return data
-

@@ -12,9 +12,7 @@ def condition(person, filter_value):
     :return: matches filter True/False
     """
     filter_value = filter_value.lower()
-    if (filter_value in person.firstname.lower() or
-            filter_value in person.lastname.lower()
-    ):
+    if (filter_value in person.fullname.lower() ):
         return True
     return False
 
@@ -49,7 +47,7 @@ class PersonDAO:
                 filtered.append(person)
         return filtered
 
-    def read_person(self, email, password=None):
+    def read_person(self, email):
         """
         reads a person by its email
         :param email:
@@ -58,36 +56,9 @@ class PersonDAO:
         person = None
         for (key, item) in self._peopledict.items():
 
-            if (key == email and
-                    password in [None, "1234"]  # FIXME
-            ):
+            if key.casefold() == email.casefold():
                 return item
         return person
-
-    def authenticate_person(self, email, password):
-        """
-        authenticates a user
-        :param email:
-        :param password:
-        :return: authentication successful true/false
-        """
-        for (key, person) in self._peopledict.items():
-            if (person.email == email and
-                    "1234" == password):
-                return True
-        return False
-
-    def save_person(self, person):
-        """
-        saves a new or changed person
-        :param person:
-        :return:
-        """
-        self._peopledict[person.email] = person
-        jstring = Person.schema().dumps(list(self._peopledict.values()), many=True)
-        file = open(current_app.config['DATAPATH'] + 'person.json', 'w')
-        file.write(jstring)
-        file.close()
 
     def load_people(self):
         """
@@ -95,7 +66,7 @@ class PersonDAO:
                 :return: none
                 :rtype: none
                 """
-        file = open(current_app.config['DATAPATH'] + 'person.json')
+        file = open(current_app.config['DATAPATH'] + 'people.json', encoding='UTF-8')
         people = json.load(file)
         for item in people:
             key = item['email']

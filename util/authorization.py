@@ -1,8 +1,8 @@
 from functools import wraps
 import jwt
-from flask import Flask, jsonify, request, make_response, g, current_app
-
+from flask import jsonify, request, make_response, g, current_app
 from data.PersonDAO import PersonDAO
+from datetime import datetime, timedelta
 
 
 def token_required(func):
@@ -26,7 +26,7 @@ def token_required(func):
             person_dao = PersonDAO()
             g.user = person_dao.read_person(email)
         except:
-            return make_response(jsonify({"message": "Invalid token!"}), 401)
+            return make_response(jsonify({"message": "EXAM/auth: Invalid token!"}), 401)
 
         return func(*args, **kwargs)
 
@@ -42,6 +42,25 @@ def teacher_required(func):
 
     return wrap
 
+def make_access_token(email):
+    """
+    creates an access token
+    :param email: the email address of the user
+    :return: token
+    """
+    person_dao = PersonDAO()
+    person = person_dao.read_person(email)
+    if person is not None:
+        access = jwt.encode({
+            'email': email,
+            'role': person.role,
+            'exp': datetime.utcnow() + timedelta(minutes=15)
+        },
+            current_app.config['ACCESS_TOKEN_KEY'], "HS256"
+        )
+        return access, person.role
+    else:
+        return None, "guest"
 
 if __name__ == '__main__':
     ''' Check if started directly '''

@@ -1,6 +1,4 @@
 import json
-import logging
-from datetime import datetime, timedelta
 
 import jwt
 import requests
@@ -11,14 +9,10 @@ from flask_restful import Resource, reqparse
 from data.PersonDAO import PersonDAO
 from util.authorization import make_access_token
 
-parser = reqparse.RequestParser()
-parser.add_argument('email', location='form', help='email')
-parser.add_argument('password', location='form', help='password')
 
-
-class AuthenticationService(Resource):
+class RefreshService(Resource):
     """
-    services for Authentication
+    service to refresh the access token
 
     author: Marcel Suter
     """
@@ -32,10 +26,11 @@ class AuthenticationService(Resource):
         """
         pass
 
-    def get(self):
+    def get(self, email):
         """
-        get a jwt access and refresh token based on the MSAL idToken
-        :return:
+        get a new access token using the refresh token
+        :param email  the email address
+        :return: access token
         """
         token = None
         if 'Authorization' in request.headers:
@@ -44,30 +39,20 @@ class AuthenticationService(Resource):
         if not token:
             return make_response(jsonify({"message": "A valid token is missing!"}), 401)
         try:
-            decoded_token = decode_idtoken(token[7:])
-            email = decoded_token['email']
-            #person_dao = PersonDAO()
-            #g.user = person_dao.read_person(email)
+            data = jwt.decode(token[7:], current_app.config['REFRESH_TOKEN_KEY'], algorithms=["HS256"])
             access, role = make_access_token(email)
-
-            if access is not None:
-                refresh = jwt.encode({
-                    'exp': datetime.utcnow() + timedelta(minutes=60)
-                },
-                    current_app.config['REFRESH_TOKEN_KEY'], "HS256"
-                )
-
-                return jsonify({
-                    'access': access,
-                    'refresh': refresh,
-                    'email': email,
-                    'role': role
-                })
-
-            return make_response('could not verify', 404, {'Authentication': '"login failed"'})
-
+            return jsonify({
+                'access': access,
+                'email': email,
+                'role': role
+            })
         except:
-            return make_response(jsonify({"message": "EXAM/login: Invalid token!"}), 401)
+            pass
+
+        return make_response(jsonify({"message": "Invalid token!"}), 401)
+
+
+
 
 def decode_idtoken(token):
     try:
@@ -96,10 +81,7 @@ def decode_idtoken(token):
             audience='8b113aa0-1d94-4f7b-a5e7-c7157e1c7b90',
             issuer="https://login.microsoftonline.com/12ea5aa9-906c-4d84-86d2-4713c6ae66d3/v2.0"
         )
-        return decoded_token
     except Exception as e:
-        logging.exception("EXAM: Error in jwt.decode")
-        logging.exception(str(e))
         raise
 
 

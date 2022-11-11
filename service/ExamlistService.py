@@ -32,13 +32,13 @@ class ExamlistService(Resource):
         :return: JSON object with the exams
         """
         args = self.parser.parse_args()
-        '''  TODO
-        if (g.user.role == 'student'):
+
+        if (g.user.role != 'teacher'):
             args['student'] = g.user.email
             args['teacher'] = ''
             args['date'] = ''
             args['status'] = '' 
-            '''
+
         exam_dao = ExamDAO()
         examlist = exam_dao.filtered_list(args['student'], args['teacher'], args['date'], args['status'])
         exams_json = '['
