@@ -1,0 +1,21 @@
+Guten Tag {{student.firstname}} {{student.lastname}}
+
+Sie haben am {{missed}} im Modul {{module}} während der Leistungsbeurteilung gefehlt und werden hiermit zu einer Nachprüfung aufgeboten.
+
+- Datum: {{event.date}}
+- Zeit:
+  * Beginn {{event.time}} (danach kein Zutritt mehr!)
+  * Türöffnung 15 Minuten vorher
+- Ort: Horgen See, Zimmer {{room}}
+- Hilfsmittel: {{tools}}
+
+Hinweise:
+- Falls Sie mehr als eine Prüfung schreiben müssen, können Sie zwischen den Prüfungen jeweils 5-10 Minuten Pausen machen. Nehmen Sie allenfalls einen Znüni und etwas zu trinken mit.
+- Absenzen müssen mit einem Arztzeugnis oder einer gültigen Dispensation belegt werden.
+- Falls Sie am Prüfungstag unerwartet verhindert sein sollten, melden Sie Ihr Fernbleiben über Teams oder E-Mail an {{supervisor}}.
+
+Freundliche Grüsse
+
+Bildungszentrum Zürichsee
+{{teacher.firstname}} {{teacher.lastname}}
+https://exam.it.bzz.ch

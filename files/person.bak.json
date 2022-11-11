@@ -1,0 +1,350 @@
+[
+  {
+    "email": "m.nagato@bzz.local",
+    "firstname": "Maria",
+    "lastname": "Nagato",
+    "role": "teacher"
+  },
+  {
+    "email": "n.oberon@bzz.local",
+    "firstname": "Nick",
+    "lastname": "Oberon",
+    "role": "teacher"
+  },
+  {
+    "email": "i.kagero@bzz.local",
+    "firstname": "Irma",
+    "lastname": "Kagero",
+    "role": "teacher"
+  },
+  {
+    "email": "k.leim@bzz.local",
+    "firstname": "Karl",
+    "lastname": "Leim",
+    "role": "teacher"
+  },
+  {
+    "email": "b.arnheim@bzz.local",
+    "firstname": "Beata",
+    "lastname": "Arnheim",
+    "role": "teacher"
+  },
+  {
+    "email": "h.ise@bzz.local",
+    "firstname": "Hans",
+    "lastname": "Ise",
+    "role": "teacher"
+  },
+  {
+    "email": "g.haragumo@bzz.local",
+    "firstname": "Gerda",
+    "lastname": "Haragumo",
+    "role": "teacher"
+  },
+  {
+    "email": "l.maya@bzz.local",
+    "firstname": "Laura",
+    "lastname": "Maya",
+    "role": "teacher"
+  },
+  {
+    "email": "e.daring@bzz.local",
+    "firstname": "Emil",
+    "lastname": "Daring",
+    "role": "teacher"
+  },
+  {
+    "email": "f.elbing@bzz.local",
+    "firstname": "Fiona",
+    "lastname": "Elbing",
+    "role": "teacher"
+  },
+  {
+    "email": "c.benson@bzz.local",
+    "firstname": "Carla",
+    "lastname": "Benson",
+    "role": "teacher"
+  },
+  {
+    "email": "Lo.Fl@bzz.local",
+    "firstname": "",
+    "lastname": "Fl Lo",
+    "role": "student"
+  },
+  {
+    "email": "Fa.No@bzz.local",
+    "firstname": "",
+    "lastname": "No Fa",
+    "role": "student"
+  },
+  {
+    "email": "Ra.Pa@bzz.local",
+    "firstname": "",
+    "lastname": "Pa Ra",
+    "role": "student"
+  },
+  {
+    "email": "No.Sc@bzz.local",
+    "firstname": "",
+    "lastname": "Sc No",
+    "role": "student"
+  },
+  {
+    "email": "Si.De@bzz.local",
+    "firstname": "",
+    "lastname": "De Si",
+    "role": "student"
+  },
+  {
+    "email": "Yo.Ze@bzz.local",
+    "firstname": "",
+    "lastname": "Ze Yo",
+    "role": "student"
+  },
+  {
+    "email": "Lo.Ma@bzz.local",
+    "firstname": "",
+    "lastname": "Ma Lo",
+    "role": "student"
+  },
+  {
+    "email": "Sa.Ni@bzz.local",
+    "firstname": "",
+    "lastname": "Ni Sa",
+    "role": "student"
+  },
+  {
+    "email": "No.Ha@bzz.local",
+    "firstname": "",
+    "lastname": "Ha No",
+    "role": "student"
+  },
+  {
+    "email": "Na.Am@bzz.local",
+    "firstname": "",
+    "lastname": "Am Na",
+    "role": "student"
+  },
+  {
+    "email": "Mi.Di@bzz.local",
+    "firstname": "",
+    "lastname": "Di Mi",
+    "role": "student"
+  },
+  {
+    "email": "El.La@bzz.local",
+    "firstname": "",
+    "lastname": "La El",
+    "role": "student"
+  },
+  {
+    "email": "iv.Go@bzz.local",
+    "firstname": "",
+    "lastname": "Go iv",
+    "role": "student"
+  },
+  {
+    "email": "Fr.Fe@bzz.local",
+    "firstname": "",
+    "lastname": "Fe Fr",
+    "role": "student"
+  },
+  {
+    "email": "Ph.Ry@bzz.local",
+    "firstname": "",
+    "lastname": "Ry Ph",
+    "role": "student"
+  },
+  {
+    "email": "Ar.Ti@bzz.local",
+    "firstname": "",
+    "lastname": "Ti Ar",
+    "role": "student"
+  },
+  {
+    "email": "Di.Fa@bzz.local",
+    "firstname": "",
+    "lastname": "Fa Di",
+    "role": "student"
+  },
+  {
+    "email": "Mo.Ha@bzz.local",
+    "firstname": "",
+    "lastname": "Ha Mo",
+    "role": "student"
+  },
+  {
+    "email": "Ju.Ja@bzz.local",
+    "firstname": "",
+    "lastname": "Ja Ju",
+    "role": "student"
+  },
+  {
+    "email": "Ma.Jo@bzz.local",
+    "firstname": "",
+    "lastname": "Jo Ma",
+    "role": "student"
+  },
+  {
+    "email": "Me.Aj@bzz.local",
+    "firstname": "",
+    "lastname": "Aj Me",
+    "role": "student"
+  },
+  {
+    "email": "An.De@bzz.local",
+    "firstname": "",
+    "lastname": "De An",
+    "role": "student"
+  },
+  {
+    "email": "Cu.Ka@bzz.local",
+    "firstname": "",
+    "lastname": "Ka Cu",
+    "role": "student"
+  },
+  {
+    "email": "Fe.Pa@bzz.local",
+    "firstname": "",
+    "lastname": "Pa Fe",
+    "role": "student"
+  },
+  {
+    "email": "Al.Ve@bzz.local",
+    "firstname": "",
+    "lastname": "Ve Al",
+    "role": "student"
+  },
+  {
+    "email": "Ka.Be@bzz.local",
+    "firstname": "",
+    "lastname": "Be Ka",
+    "role": "student"
+  },
+  {
+    "email": "Al.Bu@bzz.local",
+    "firstname": "",
+    "lastname": "Bu Al",
+    "role": "student"
+  },
+  {
+    "email": "Is.Co@bzz.local",
+    "firstname": "",
+    "lastname": "Co Is",
+    "role": "student"
+  },
+  {
+    "email": "Na.Ge@bzz.local",
+    "firstname": "",
+    "lastname": "Ge Na",
+    "role": "student"
+  },
+  {
+    "email": "Ph.Gr@bzz.local",
+    "firstname": "",
+    "lastname": "Gr Ph",
+    "role": "student"
+  },
+  {
+    "email": "An.Ka@bzz.local",
+    "firstname": "",
+    "lastname": "Ka An",
+    "role": "student"
+  },
+  {
+    "email": "Lu.Oe@bzz.local",
+    "firstname": "",
+    "lastname": "Oe Lu",
+    "role": "student"
+  },
+  {
+    "email": "Er.Qu@bzz.local",
+    "firstname": "",
+    "lastname": "Qu Er",
+    "role": "student"
+  },
+  {
+    "email": "Ch.Sa@bzz.local",
+    "firstname": "",
+    "lastname": "Sa Ch",
+    "role": "student"
+  },
+  {
+    "email": "Bl.Sh@bzz.local",
+    "firstname": "",
+    "lastname": "Sh Bl",
+    "role": "student"
+  },
+  {
+    "email": "Da.Re@bzz.local",
+    "firstname": "",
+    "lastname": "Re Da",
+    "role": "student"
+  },
+  {
+    "email": "Li.Ew@bzz.local",
+    "firstname": "",
+    "lastname": "Ew Li",
+    "role": "student"
+  },
+  {
+    "email": "Da.Ra@bzz.local",
+    "firstname": "",
+    "lastname": "Ra Da",
+    "role": "student"
+  },
+  {
+    "email": "Ra.Sc@bzz.local",
+    "firstname": "",
+    "lastname": "Sc Ra",
+    "role": "student"
+  },
+  {
+    "email": "El.St@bzz.local",
+    "firstname": "",
+    "lastname": "St El",
+    "role": "student"
+  },
+  {
+    "email": "Sv.Gi@bzz.local",
+    "firstname": "",
+    "lastname": "Gi Sv",
+    "role": "student"
+  },
+  {
+    "email": "Cy.Sh@bzz.local",
+    "firstname": "",
+    "lastname": "Sh Cy",
+    "role": "student"
+  },
+  {
+    "email": "Mo.Le@bzz.local",
+    "firstname": "",
+    "lastname": "Le Mo",
+    "role": "student"
+  },
+  {
+    "email": "Ma.Wo@bzz.local",
+    "firstname": "",
+    "lastname": "Wo Ma",
+    "role": "student"
+  },
+  {
+    "email": "Va.Wo@bzz.local",
+    "firstname": "",
+    "lastname": "Wo Va",
+    "role": "student"
+  },
+  {
+    "email": "Li.We@bzz.local",
+    "firstname": "",
+    "lastname": "We Li",
+    "role": "student"
+  },
+  {
+    "email": "Muster",
+    "firstname": "muha@bzz.local",
+    "lastname": "Hans",
+    "role": "student"
+  }
+]

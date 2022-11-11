@@ -1,0 +1,322 @@
+[
+ {
+   "lastname": "Fl Lo",
+   "cohort": "GB20c",
+   "email": "Lo.Fl@bzz.local"
+ },
+ {
+   "lastname": "Fl Lo",
+   "cohort": "GB20c",
+   "email": "Lo.Fl@bzz.local"
+ },
+ {
+   "lastname": "No Fa",
+   "cohort": "GB20c",
+   "email": "Fa.No@bzz.local"
+ },
+ {
+   "lastname": "No Fa",
+   "cohort": "GB20c",
+   "email": "Fa.No@bzz.local"
+ },
+ {
+   "lastname": "Pa Ra",
+   "cohort": "GB20c",
+   "email": "Ra.Pa@bzz.local"
+ },
+ {
+   "lastname": "Sc No",
+   "cohort": "GB20c",
+   "email": "No.Sc@bzz.local"
+ },
+ {
+   "lastname": "De Si",
+   "cohort": "GB21e",
+   "email": "Si.De@bzz.local"
+ },
+ {
+   "lastname": "Ze Yo",
+   "cohort": "GC19b",
+   "email": "Yo.Ze@bzz.local"
+ },
+ {
+   "lastname": "Ze Yo",
+   "cohort": "GC19b",
+   "email": "Yo.Ze@bzz.local"
+ },
+ {
+   "lastname": "Ze Yo",
+   "cohort": "GC19b",
+   "email": "Yo.Ze@bzz.local"
+ },
+ {
+   "lastname": "Ze Yo",
+   "cohort": "GC19b",
+   "email": "Yo.Ze@bzz.local"
+ },
+ {
+   "lastname": "Ze Yo",
+   "cohort": "GC19b",
+   "email": "Yo.Ze@bzz.local"
+ },
+ {
+   "lastname": "Ma Lo",
+   "cohort": "GC20b",
+   "email": "Lo.Ma@bzz.local"
+ },
+ {
+   "lastname": "Ni Sa",
+   "cohort": "AK19a",
+   "email": "Sa.Ni@bzz.local"
+ },
+ {
+   "lastname": "Ha No",
+   "cohort": "AK20a",
+   "email": "No.Ha@bzz.local"
+ },
+ {
+   "lastname": "Ha No",
+   "cohort": "AK20a",
+   "email": "No.Ha@bzz.local"
+ },
+ {
+   "lastname": "Am Na",
+   "cohort": "AK20b",
+   "email": "Na.Am@bzz.local"
+ },
+ {
+   "lastname": "Am Na",
+   "cohort": "AK20b",
+   "email": "Na.Am@bzz.local"
+ },
+ {
+   "lastname": "Di Mi",
+   "cohort": "AK20b",
+   "email": "Mi.Di@bzz.local"
+ },
+ {
+   "lastname": "La El",
+   "cohort": "AK21b",
+   "email": "El.La@bzz.local"
+ },
+ {
+   "lastname": "Go iv",
+   "cohort": "BK19a",
+   "email": "iv.Go@bzz.local"
+ },
+ {
+   "lastname": "Go iv",
+   "cohort": "BK19b",
+   "email": "iv.Go@bzz.local"
+ },
+ {
+   "lastname": "Fe Fr",
+   "cohort": "BK20a",
+   "email": "Fr.Fe@bzz.local"
+ },
+ {
+   "lastname": "Fe Fr",
+   "cohort": "BK20a",
+   "email": "Fr.Fe@bzz.local"
+ },
+ {
+   "lastname": "Ry Ph",
+   "cohort": "BK20a",
+   "email": "Ph.Ry@bzz.local"
+ },
+ {
+   "lastname": "Ry Ph",
+   "cohort": "BK20a",
+   "email": "Ph.Ry@bzz.local"
+ },
+ {
+   "lastname": "Ti Ar",
+   "cohort": "BK20a",
+   "email": "Ar.Ti@bzz.local"
+ },
+ {
+   "lastname": "Fa Di",
+   "cohort": "BK20b",
+   "email": "Di.Fa@bzz.local"
+ },
+ {
+   "lastname": "Fa Di",
+   "cohort": "BK20b",
+   "email": "Di.Fa@bzz.local"
+ },
+ {
+   "lastname": "Ha Mo",
+   "cohort": "BK20b",
+   "email": "Mo.Ha@bzz.local"
+ },
+ {
+   "lastname": "Ha Mo",
+   "cohort": "BK20b",
+   "email": "Mo.Ha@bzz.local"
+ },
+ {
+   "lastname": "Ja Ju",
+   "cohort": "BK20b",
+   "email": "Ju.Ja@bzz.local"
+ },
+ {
+   "lastname": "Ja Ju",
+   "cohort": "BK20b",
+   "email": "Ju.Ja@bzz.local"
+ },
+ {
+   "lastname": "Jo Ma",
+   "cohort": "BK20b",
+   "email": "Ma.Jo@bzz.local"
+ },
+ {
+   "lastname": "Jo Ma",
+   "cohort": "BK20b",
+   "email": "Ma.Jo@bzz.local"
+ },
+ {
+   "lastname": "Jo Ma",
+   "cohort": "BK20b",
+   "email": "Ma.Jo@bzz.local"
+ },
+ {
+   "lastname": "Jo Ma",
+   "cohort": "BK20b",
+   "email": "Ma.Jo@bzz.local"
+ },
+ {
+   "lastname": "Aj Me",
+   "cohort": "CD20b",
+   "email": "Me.Aj@bzz.local"
+ },
+ {
+   "lastname": "De An",
+   "cohort": "CD20b",
+   "email": "An.De@bzz.local"
+ },
+ {
+   "lastname": "Ka Cé",
+   "cohort": "CD20b",
+   "email": "Cé.Ka@bzz.local"
+ },
+ {
+   "lastname": "Pa Fe",
+   "cohort": "CD20b",
+   "email": "Fe.Pa@bzz.local"
+ },
+ {
+   "lastname": "Ve Al",
+   "cohort": "CD20b",
+   "email": "Al.Ve@bzz.local"
+ },
+ {
+   "lastname": "Be Ka",
+   "cohort": "CH20a",
+   "email": "Ka.Be@bzz.local"
+ },
+ {
+   "lastname": "Bu Al",
+   "cohort": "CH20a",
+   "email": "Al.Bu@bzz.local"
+ },
+ {
+   "lastname": "Co Is",
+   "cohort": "CH20a",
+   "email": "Is.Co@bzz.local"
+ },
+ {
+   "lastname": "Ge Na",
+   "cohort": "CH20a",
+   "email": "Na.Ge@bzz.local"
+ },
+ {
+   "lastname": "Gr Ph",
+   "cohort": "CH20a",
+   "email": "Ph.Gr@bzz.local"
+ },
+ {
+   "lastname": "Ka An",
+   "cohort": "CH20a",
+   "email": "An.Ka@bzz.local"
+ },
+ {
+   "lastname": "Oe Lu",
+   "cohort": "CH20a",
+   "email": "Lu.Oe@bzz.local"
+ },
+ {
+   "lastname": "Qu Er",
+   "cohort": "CH20a",
+   "email": "Er.Qu@bzz.local"
+ },
+ {
+   "lastname": "Sa Ch",
+   "cohort": "CH20a",
+   "email": "Ch.Sa@bzz.local"
+ },
+ {
+   "lastname": "Sh Bl",
+   "cohort": "CH20a",
+   "email": "Bl.Sh@bzz.local"
+ },
+ {
+   "lastname": "Re Da",
+   "cohort": "EA19a",
+   "email": "Da.Re@bzz.local"
+ },
+ {
+   "lastname": "Ew Li",
+   "cohort": "EA20a",
+   "email": "Li.Ew@bzz.local"
+ },
+ {
+   "lastname": "Ra Da",
+   "cohort": "EA20a",
+   "email": "Da.Ra@bzz.local"
+ },
+ {
+   "lastname": "Sc Ra",
+   "cohort": "EA20a",
+   "email": "Ra.Sc@bzz.local"
+ },
+ {
+   "lastname": "St El",
+   "cohort": "EA20a",
+   "email": "El.St@bzz.local"
+ },
+ {
+   "lastname": "Gi Sv",
+   "cohort": "EA20b",
+   "email": "Sv.Gi@bzz.local"
+ },
+ {
+   "lastname": "Sh Cy",
+   "cohort": "EA20b",
+   "email": "Cy.Sh@bzz.local"
+ },
+ {
+   "lastname": "Sh Cy",
+   "cohort": "EA20b",
+   "email": "Cy.Sh@bzz.local"
+ },
+ {
+   "lastname": "Le Mo",
+   "cohort": "EA20c",
+   "email": "Mo.Le@bzz.local"
+ },
+ {
+   "lastname": "Wo Ma",
+   "cohort": "EA20c",
+   "email": "Ma.Wo@bzz.local"
+ },
+ {
+   "lastname": "Wo Va",
+   "cohort": "EA20c",
+   "email": "Va.Wo@bzz.local"
+ },
+ {
+   "lastname": "We Li",
+   "cohort": "EA20d",
+   "email": "Li.We@bzz.local"
+ }
+]
