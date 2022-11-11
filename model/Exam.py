@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 import datetime
+import logging
 from dateutil import parser
 from model.Person import Person
 
@@ -27,29 +28,31 @@ class Exam(dict):
     status: str
 
     def to_json(self, response=True):
-        # try:
-        jstring = '{"exam_uuid":"' + self.exam_uuid + '",'
-        jstring += '"cohort": "' + self.cohort + '", '
-        jstring += '"module": "' + self.module + '", '
-        jstring += '"exam_num": "' + self.exam_num + '", '
-        jstring += '"missed": "' + self.missed.strftime("%Y-%m-%d") + '", '
-        jstring += '"duration": ' + str(self.duration) + ', '
-        jstring += '"room": "' + self.room + '",'
-        jstring += '"remarks": "' + self.remarks + '", '
-        jstring += '"tools": "' + self.tools + '", '
-        jstring += '"event_uuid": "' + self.event_uuid + '", '
-        jstring += '"status": "' + self.status + '", '
-        if response:
-            jstring += '"teacher": ' + self.teacher.to_json() + ',' + \
-                       '"student": ' + self.student.to_json() + '}'
-        else:
-            jstring += '"teacher":"' + self.teacher.email + '",' + \
-                       '"student":"' + self.student.email + '"}'
-        return jstring
+        try:
+            jstring = '{"exam_uuid":"' + self.exam_uuid + '",'
+            jstring += '"cohort": "' + self.cohort + '", '
+            jstring += '"module": "' + self.module + '", '
+            jstring += '"exam_num": "' + self.exam_num + '", '
+            jstring += '"missed": "' + self.missed.strftime("%Y-%m-%d") + '", '
+            jstring += '"duration": ' + str(self.duration) + ', '
+            jstring += '"room": "' + self.room + '",'
+            jstring += '"remarks": "' + self.remarks + '", '
+            jstring += '"tools": "' + self.tools + '", '
+            jstring += '"event_uuid": "' + self.event_uuid + '", '
+            jstring += '"status": "' + self.status + '", '
+            if response:
+                jstring += '"teacher": ' + self.teacher.to_json() + ',' + \
+                           '"student": ' + self.student.to_json() + '}'
+            else:
+                jstring += '"teacher":"' + self.teacher.email + '",' + \
+                           '"student":"' + self.student.email + '"}'
+            return jstring
 
-    # except Exception as e:
-    #    logging.exception("An exception was thrown!")
-    #    print('Error')
+        except Exception as e:
+            logging.exception("An exception was thrown!")
+            logging.exception('exam_uuid: ' + self.exam_uuid)
+            print('Error')
+            return '{}'
 
     @property
     def exam_uuid(self):
