@@ -2,9 +2,11 @@ from flask import Flask, render_template, send_from_directory
 from flask_cors import CORS
 from flask_restful import  Api
 
+from service.RefreshService import RefreshService
+from service.TestService import TestService
 from service.EmailService import EmailService
 from service.EventlistService import EventlistService
-from service.AuthenticationService import AuthorizationService
+from service.AuthenticationService import AuthenticationService
 from service.EventService import EventService
 from service.ExamService import ExamService
 from service.ExamlistService import ExamlistService
@@ -17,11 +19,13 @@ CORS(app)
 app.config.from_pyfile('./.env')
 api = Api(app)
 
+api.add_resource(AuthenticationService, '/login')
+api.add_resource(RefreshService, '/refresh/<email>')
+api.add_resource(TestService, '/test')
 api.add_resource(ExamService, '/exam', '/exam/<exam_uuid>')
 api.add_resource(ExamlistService, '/exams')
 api.add_resource(PersonService, '/person')
 api.add_resource(PeoplelistService, '/people/<filter_value>')
-api.add_resource(AuthorizationService, '/login', '/login/<email>')
 api.add_resource(EventService, '/event/<event_uuid>')
 api.add_resource(EventlistService, '/events', '/events/<date>')
 api.add_resource(EmailService, '/email', '/email/<exam_uuid>/<type>')
