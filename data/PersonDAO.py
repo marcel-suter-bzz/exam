@@ -64,19 +64,6 @@ class PersonDAO:
                 return item
         return person
 
-    def authenticate_person(self, email, password):
-        """
-        authenticates a user
-        :param email:
-        :param password:
-        :return: authentication successful true/false
-        """
-        for (key, person) in self._peopledict.items():
-            if (person.email == email and
-                    "1234" == password):
-                return True
-        return False
-
     def save_person(self, person):
         """
         saves a new or changed person
@@ -85,7 +72,7 @@ class PersonDAO:
         """
         self._peopledict[person.email] = person
         jstring = Person.schema().dumps(list(self._peopledict.values()), many=True)
-        file = open(current_app.config['DATAPATH'] + 'person.json', 'w')
+        file = open(current_app.config['DATAPATH'] + 'people.json', 'w')
         file.write(jstring)
         file.close()
 
@@ -95,7 +82,7 @@ class PersonDAO:
                 :return: none
                 :rtype: none
                 """
-        file = open(current_app.config['DATAPATH'] + 'person.json')
+        file = open(current_app.config['DATAPATH'] + 'people.json')
         people = json.load(file)
         for item in people:
             key = item['email']

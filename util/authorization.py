@@ -1,8 +1,11 @@
 from functools import wraps
 import jwt
+import json
 from flask import Flask, jsonify, request, make_response, g, current_app
-
+import requests
+from cryptography.hazmat.primitives import serialization
 from data.PersonDAO import PersonDAO
+from datetime import datetime, timedelta
 
 
 def token_required(func):
@@ -42,6 +45,25 @@ def teacher_required(func):
 
     return wrap
 
+def make_access_token(email):
+    """
+    creates an access token
+    :param email: the email address of the user
+    :return: token
+    """
+    person_dao = PersonDAO()
+    person = person_dao.read_person(email)
+    if person is not None:
+        access = jwt.encode({
+            'email': email,
+            'role': person.role,
+            'exp': datetime.utcnow() + timedelta(minutes=5)
+        },
+            current_app.config['ACCESS_TOKEN_KEY'], "HS256"
+        )
+        return access, person.role
+    else:
+        return None, "guest"
 
 if __name__ == '__main__':
     ''' Check if started directly '''

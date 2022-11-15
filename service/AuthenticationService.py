@@ -1,17 +1,21 @@
+import json
 from datetime import datetime, timedelta
 
 import jwt
-from flask import make_response, jsonify, current_app, request
+import requests
+from cryptography.hazmat.primitives import serialization
+from flask import make_response, jsonify, current_app, request, g
 from flask_restful import Resource, reqparse
 
 from data.PersonDAO import PersonDAO
+from util.authorization import make_access_token
 
 parser = reqparse.RequestParser()
 parser.add_argument('email', location='form', help='email')
 parser.add_argument('password', location='form', help='password')
 
 
-class AuthorizationService(Resource):
+class AuthenticationService(Resource):
     """
     services for Authentication
 
@@ -51,11 +55,10 @@ class AuthorizationService(Resource):
 
         return make_response('could not verify', 404, {'Authentication': '"login failed"'})
 
-    def get(self, email):
+    def get(self):
         """
-        get a new access token using the refresh token
-        :param email  the email address
-        :return: access token
+        get a jwt access and refresh token based on the MSAL idToken
+        :return:
         """
         token = None
         if 'Authorization' in request.headers:
@@ -64,37 +67,63 @@ class AuthorizationService(Resource):
         if not token:
             return make_response(jsonify({"message": "A valid token is missing!"}), 401)
         try:
-            data = jwt.decode(token[7:], current_app.config['REFRESH_TOKEN_KEY'], algorithms=["HS256"])
+            decoded_token = decode_idtoken(token[7:])
+            email = decoded_token['email']
+            #person_dao = PersonDAO()
+            #g.user = person_dao.read_person(email)
             access, role = make_access_token(email)
-            return jsonify({
-                'access': access,
-                'email': email,
-                'role': role
-            })
+
+            if access is not None:
+                refresh = jwt.encode({
+                    'exp': datetime.utcnow() + timedelta(minutes=60)
+                },
+                    current_app.config['REFRESH_TOKEN_KEY'], "HS256"
+                )
+
+                return jsonify({
+                    'access': access,
+                    'refresh': refresh,
+                    'email': email,
+                    'role': role
+                })
+
+            return make_response('could not verify', 404, {'Authentication': '"login failed"'})
+
         except:
-            pass
+            return make_response(jsonify({"message": "Invalid token!"}), 401)
 
-        return make_response(jsonify({"message": "Invalid token!"}), 401)
+def decode_idtoken(token):
+    try:
+        response = requests.get("https://login.microsoftonline.com/common/discovery/keys")
+        keys = response.json()['keys']
 
-def make_access_token(email):
-    """
-    creates an access token
-    :param email: the email address of the user
-    :return: token
-    """
-    person_dao = PersonDAO()
-    person = person_dao.read_person(email)
-    if person is not None:
-        access = jwt.encode({
-            'email': email,
-            'role': person.role,
-            'exp': datetime.utcnow() + timedelta(minutes=5)
-        },
-            current_app.config['ACCESS_TOKEN_KEY'], "HS256"
+        token_headers = jwt.get_unverified_header(token)
+        token_alg = token_headers['alg']
+        token_kid = token_headers['kid']
+        public_key = None
+        for key in keys:
+            if key['kid'] == token_kid:
+                public_key = key
+
+        rsa_pem_key = jwt.algorithms.RSAAlgorithm.from_jwk(json.dumps(public_key))
+        rsa_pem_key_bytes = rsa_pem_key.public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo
         )
-        return access, person.role
-    else:
-        return None, "guest"
+
+        decoded_token = jwt.decode(
+            token,
+            key=rsa_pem_key_bytes,
+            verify=True,
+            algorithms=[token_alg],
+            audience='8b113aa0-1d94-4f7b-a5e7-c7157e1c7b90',
+            issuer="https://login.microsoftonline.com/12ea5aa9-906c-4d84-86d2-4713c6ae66d3/v2.0"
+        )
+        return decoded_token
+    except Exception as e:
+        raise
+
+
 
 if __name__ == '__main__':
     ''' Check if started directly '''
