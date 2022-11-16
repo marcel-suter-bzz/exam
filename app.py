@@ -3,7 +3,7 @@ from flask_cors import CORS
 from flask_restful import  Api
 
 from service.RefreshService import RefreshService
-from service.TestService import TestService
+#from service.TestService import TestService
 from service.EmailService import EmailService
 from service.EventlistService import EventlistService
 from service.AuthenticationService import AuthenticationService
@@ -21,7 +21,7 @@ api = Api(app)
 
 api.add_resource(AuthenticationService, '/login')
 api.add_resource(RefreshService, '/refresh/<email>')
-api.add_resource(TestService, '/test')
+#api.add_resource(TestService, '/test')
 api.add_resource(ExamService, '/exam', '/exam/<exam_uuid>')
 api.add_resource(ExamlistService, '/exams')
 api.add_resource(PersonService, '/person')

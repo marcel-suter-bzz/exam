@@ -1,4 +1,5 @@
 import json
+import logging
 from datetime import datetime, timedelta
 
 import jwt
@@ -121,6 +122,8 @@ def decode_idtoken(token):
         )
         return decoded_token
     except Exception as e:
+        logging.exception("EXAM: Error in jwt.decode")
+        logging.exception(str(e))
         raise
 
 

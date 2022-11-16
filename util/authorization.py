@@ -1,9 +1,6 @@
 from functools import wraps
 import jwt
-import json
-from flask import Flask, jsonify, request, make_response, g, current_app
-import requests
-from cryptography.hazmat.primitives import serialization
+from flask import jsonify, request, make_response, g, current_app
 from data.PersonDAO import PersonDAO
 from datetime import datetime, timedelta
 
