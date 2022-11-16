@@ -72,7 +72,7 @@ class PersonDAO:
         """
         self._peopledict[person.email] = person
         jstring = Person.schema().dumps(list(self._peopledict.values()), many=True)
-        file = open(current_app.config['DATAPATH'] + 'people.json', 'w', encoding='utf-8')
+        file = open(current_app.config['DATAPATH'] + 'people.json', 'w', encoding='ISO-8859-1')
         file.write(jstring)
         file.close()
 
@@ -82,7 +82,7 @@ class PersonDAO:
                 :return: none
                 :rtype: none
                 """
-        file = open(current_app.config['DATAPATH'] + 'people.json', encoding='utf-8')
+        file = open(current_app.config['DATAPATH'] + 'people.json', encoding='ISO-8859-1')
         people = json.load(file)
         for item in people:
             key = item['email']

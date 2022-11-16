@@ -38,7 +38,7 @@ class PrintService(Resource):
         exam_dao = ExamDAO()
         exam = exam_dao.read_exam(exam_uuid)
         filename = current_app.config['TEMPLATEPATH'] + 'sheet.json'
-        file = open(filename, encoding='utf-8')
+        file = open(filename, encoding='ISO-8859-1')
         texts = json.load(file)
         http_status = 404
         if exam is not None:
@@ -67,7 +67,7 @@ class PrintService(Resource):
         pdf.set_fill_color(r=192, g=192, b=192)
         pdf.set_line_width(0.5)
         filename = current_app.config['TEMPLATEPATH'] + 'sheet.json'
-        file = open(filename, encoding='utf-8')
+        file = open(filename, encoding='ISO-8859-1')
         texts = json.load(file)
         for exam_uuid in args['exam_uuid']:
             exam = exam_dao.read_exam(exam_uuid[0])
