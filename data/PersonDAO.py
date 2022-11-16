@@ -49,7 +49,7 @@ class PersonDAO:
                 filtered.append(person)
         return filtered
 
-    def read_person(self, email, password=None):
+    def read_person(self, email):
         """
         reads a person by its email
         :param email:
@@ -58,23 +58,9 @@ class PersonDAO:
         person = None
         for (key, item) in self._peopledict.items():
 
-            if (key.casefold() == email.casefold() and
-                    password in [None, "1234"]  # FIXME
-            ):
+            if key.casefold() == email.casefold():
                 return item
         return person
-
-    def save_person(self, person):
-        """
-        saves a new or changed person
-        :param person:
-        :return:
-        """
-        self._peopledict[person.email] = person
-        jstring = Person.schema().dumps(list(self._peopledict.values()), many=True)
-        file = open(current_app.config['DATAPATH'] + 'people.json', 'w', encoding='ISO-8859-1')
-        file.write(jstring)
-        file.close()
 
     def load_people(self):
         """

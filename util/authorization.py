@@ -26,7 +26,7 @@ def token_required(func):
             person_dao = PersonDAO()
             g.user = person_dao.read_person(email)
         except:
-            return make_response(jsonify({"message": "Invalid token!"}), 401)
+            return make_response(jsonify({"message": "EXAM/auth: Invalid token!"}), 401)
 
         return func(*args, **kwargs)
 
