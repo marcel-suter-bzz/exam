@@ -74,7 +74,7 @@ class EmailService(Resource):
             filename += 'invitation.txt'
             sender = event.supervisors[0]
             subject = 'Aufgebot zur Nachprüfung'
-        file = open(filename, encoding='ISO-8859-1')
+        file = open(filename, encoding='UTF-8')
         text = file.read()
         data = {'student.firstname': exam.student.firstname,
                 'student.lastname': exam.student.lastname,

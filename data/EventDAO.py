@@ -52,22 +52,6 @@ class EventDAO:
             return self._eventdict[uuid]
         return None
 
-    def save_event(self, event):
-        """
-        saves a new or changed event
-        :param event:
-        :return:
-        """
-        self.load_events()
-        if event.event_uuid is None:
-            event.event_uuid = str(uuid.uuid4())
-        self._eventdict[event.event_uuid] = event
-        jstring = Event.schema().dumps(list(self._examvent.values()), many=True)
-
-        file = open(current_app.config['DATAPATH'] + 'events.json', 'w', encoding='ISO-8859-1')
-        file.write(jstring)
-        file.close()
-
     def load_events(self):
 
         """
@@ -76,7 +60,7 @@ class EventDAO:
         :rtype: none
         """
 
-        file = open(current_app.config['DATAPATH'] + 'events.json', encoding='ISO-8859-1')
+        file = open(current_app.config['DATAPATH'] + 'events.json', encoding='UTF-8')
         events = json.load(file)
         for item in events:
             key = item['event_uuid']

@@ -29,13 +29,14 @@ class PeoplelistService(Resource):
         :param filter_value: the filter to be applied
         :return: JSON object with the people
         """
+        filter_value.replace(' ', '%20')
         person_dao = PersonDAO()
         peoplelist = person_dao.filtered_list(filter_value)
-        people_json = '['
+        people_json = ' '
         for person in peoplelist:
             data = person.to_json()
             people_json += data + ','
-        people_json = people_json[:-1] + ']'
+        people_json = '[' + people_json[:-1] + ']'
         return make_response(
             people_json, 200
         )

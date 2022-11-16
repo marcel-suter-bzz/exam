@@ -32,30 +32,6 @@ class AuthenticationService(Resource):
         """
         pass
 
-    def post(self):
-        """
-        authenticates a user
-        :return: http response
-        """
-        args = parser.parse_args()
-        access, role = make_access_token(args.email)
-
-        if access is not None:
-            refresh = jwt.encode({
-                'exp': datetime.utcnow() + timedelta(minutes=60)
-            },
-                current_app.config['REFRESH_TOKEN_KEY'], "HS256"
-            )
-
-            return jsonify({
-                'access': access,
-                'refresh': refresh,
-                'email': args.email,
-                'role': role
-            })
-
-        return make_response('could not verify', 404, {'Authentication': '"login failed"'})
-
     def get(self):
         """
         get a jwt access and refresh token based on the MSAL idToken
@@ -70,8 +46,6 @@ class AuthenticationService(Resource):
         try:
             decoded_token = decode_idtoken(token[7:])
             email = decoded_token['email']
-            #person_dao = PersonDAO()
-            #g.user = person_dao.read_person(email)
             access, role = make_access_token(email)
 
             if access is not None:
@@ -91,7 +65,8 @@ class AuthenticationService(Resource):
             return make_response('could not verify', 404, {'Authentication': '"login failed"'})
 
         except:
-            return make_response(jsonify({"message": "Invalid token!"}), 401)
+            return make_response(jsonify({"message": "EXAM/login: Invalid token!"}), 401)
+
 
 def decode_idtoken(token):
     try:
@@ -125,7 +100,6 @@ def decode_idtoken(token):
         logging.exception("EXAM: Error in jwt.decode")
         logging.exception(str(e))
         raise
-
 
 
 if __name__ == '__main__':
