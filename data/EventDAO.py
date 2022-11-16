@@ -64,7 +64,7 @@ class EventDAO:
         self._eventdict[event.event_uuid] = event
         jstring = Event.schema().dumps(list(self._examvent.values()), many=True)
 
-        file = open(current_app.config['DATAPATH'] + 'events.json', 'w')
+        file = open(current_app.config['DATAPATH'] + 'events.json', 'w', encoding='utf-8')
         file.write(jstring)
         file.close()
 
@@ -76,7 +76,7 @@ class EventDAO:
         :rtype: none
         """
 
-        file = open(current_app.config['DATAPATH'] + 'events.json')
+        file = open(current_app.config['DATAPATH'] + 'events.json', encoding='utf-8')
         events = json.load(file)
         for item in events:
             key = item['event_uuid']
