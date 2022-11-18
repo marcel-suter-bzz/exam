@@ -102,6 +102,7 @@ def decode_idtoken(token):
         raise
 
 
+
 if __name__ == '__main__':
     ''' Check if started directly '''
     pass
