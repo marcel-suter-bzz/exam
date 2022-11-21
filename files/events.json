@@ -15,6 +15,6 @@
     "event_uuid" : "20bc11938-d5cc-4e9e-802b-223a6775d7e0",
     "timestamp": "2023-02-09 09:15:00",
     "rooms" : ["H100", "H131"],
-    "supervisors": ["hanna.heimspiel@bzz.local", "hans.muster@bzz.local"]
+    "supervisors": ["Marcel.Suter@bzz.ch", "Andre.Probst@bzz.ch"]
   }
 ]

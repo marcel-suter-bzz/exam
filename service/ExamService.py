@@ -30,8 +30,8 @@ class ExamService(Resource):
         self.parser.add_argument('cohort', location='form', default=None, help='cohort')
         self.parser.add_argument('module', location='form', default=None, help='module')
         self.parser.add_argument('exam_num', location='form', default=None, help='exam-num')
-        self.parser.add_argument('duration', location='form', type=str, default=None, help='Muss eine Ganzzahl sein')
-        self.parser.add_argument('room', location='form', type=str, default=None, help='Raum')
+        self.parser.add_argument('duration', location='form', type=int, default=0, help='Muss eine Ganzzahl sein')
+        self.parser.add_argument('room', location='form', type=str, default='offen', help='Raum')
         self.parser.add_argument('missed', location='form', default=None, help='Muss ein gültiges Datum sein')
         self.parser.add_argument('remarks', location='form', default=None, help='remarks')
         self.parser.add_argument('tools', location='form', default=None, help='tools')
@@ -84,15 +84,17 @@ class ExamService(Resource):
         :param args:
         :return:
         """
-        if args.exam_uuid is None or args.exam_uuid == '':
-            args.exam_uuid = str(uuid.uuid4())
+        exam_dao = ExamDAO()
         person_dao = PersonDAO()
-        teacher = args.teacher
+        teacher = None
         if args.teacher is not None:
             teacher = person_dao.read_person(args.teacher)
-        student = args.student
+        student = None
         if args.student is not None:
             student = person_dao.read_person(args.student)
+
+        if args.exam_uuid is None or args.exam_uuid == '':
+            args.exam_uuid = str(uuid.uuid4())
         exam = Exam(
             exam_uuid=args.exam_uuid,
             teacher=teacher,
@@ -108,7 +110,7 @@ class ExamService(Resource):
             event_uuid=args.event_uuid,
             status=args.status
         )
-        exam_dao = ExamDAO()
+
         exam_dao.save_exam(exam)
 
 if __name__ == '__main__':
