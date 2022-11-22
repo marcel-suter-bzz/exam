@@ -1,7 +1,7 @@
 [
   {
     "exam_uuid": "47fe35f7-5eea-48aa-8d26-7f105e90c338",
-    "cohort": "IM22b",
+    "cohort": "XY23",
     "module": "117",
     "exam_num": "2",
     "missed": "2022-11-10",
@@ -11,22 +11,7 @@
     "tools": "Open book",
     "event_uuid": "20bc11938-d5cc-4e9e-802b-223a6775d7e0",
     "status": "offen",
-    "teacher": "Andre.Probst@bzz.ch",
-    "student": "newallb@bzz.ch"
-  },
-  {
-    "exam_uuid": "ac3e7328-075f-47c4-924f-fd991458a82e",
-    "cohort": "IA22b",
-    "module": "117",
-    "exam_num": "LB2",
-    "missed": "2022-11-02",
-    "duration": 0,
-    "room": "H100",
-    "remarks": "Moodle-Test & VM",
-    "tools": "Open book",
-    "event_uuid": "20bc11938-d5cc-4e9e-802b-223a6775d7e0",
-    "status": "pendent",
-    "teacher": "Andre.Probst@bzz.ch",
-    "student": "lothritsangt@bzz.ch"
+    "teacher": "Marcel.suter@bzz.ch",
+    "student": "Va.Wo@bzz.local"
   }
 ]
