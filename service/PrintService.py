@@ -51,7 +51,7 @@ class PrintService(Resource):
             response = make_response(pdf.output())
             response.headers["Content-Type"] = "application/pdf"
             return response
-        return make_response('not found', 404)
+        return make_response('not found', http_status)
 
     @token_required
     @teacher_required
