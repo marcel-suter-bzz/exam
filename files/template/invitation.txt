@@ -17,5 +17,6 @@ Hinweise:
 Freundliche Grüsse
 
 Bildungszentrum Zürichsee
-{{teacher.firstname}} {{teacher.lastname}}
+{{chief_supervisor.firstname}} {{chief_supervisor.lastname}}
+{{chief_supervisor.email}}
 https://exam.it.bzz.ch

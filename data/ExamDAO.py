@@ -36,7 +36,7 @@ def condition(exam, student, teacher, date, status):
         elif status == "closed" and exam.status not in ['erledigt', 'pnab', 'gelöscht']:
             match = False
     except:
-      print ('Error in ExamDAO.condition')
+        print('Error in ExamDAO.condition')
     return match
 
 
@@ -96,18 +96,30 @@ class ExamDAO:
             self._examdict[exam.exam_uuid] = exam
         old = self._examdict[exam.exam_uuid]
 
-        if exam.event_uuid is not None: old.event_uuid = exam.event_uuid
-        if exam.student is not None: old.student = exam.student
-        if exam.teacher is not None: old.teacher = exam.teacher
-        if exam.cohort is not None: old.cohort = exam.cohort
-        if exam.module is not None: old.module = exam.module
-        if exam.exam_num is not None: old.exam_num = exam.exam_num
-        if exam.missed is not None: old.missed = exam.missed
-        if exam.duration is not None: old.duration = exam.duration
-        if exam.room is not None: old.room = exam.room
-        if exam.remarks is not None: old.remarks = exam.remarks
-        if exam.tools is not None: old.tools = exam.tools
-        if exam.status is not None: old.status = exam.status
+        if exam.event_uuid is not None:
+            old.event_uuid = exam.event_uuid
+        if exam.student is not None:
+            old.student = exam.student
+        if exam.teacher is not None:
+            old.teacher = exam.teacher
+        if exam.cohort is not None:
+            old.cohort = exam.cohort
+        if exam.module is not None:
+            old.module = exam.module
+        if exam.exam_num is not None:
+            old.exam_num = exam.exam_num
+        if exam.missed is not None:
+            old.missed = exam.missed
+        if exam.duration is not None and exam.duration != 0:
+            old.duration = exam.duration
+        if exam.room is not None:
+            old.room = exam.room
+        if exam.remarks is not None:
+            old.remarks = exam.remarks
+        if exam.tools is not None:
+            old.tools = exam.tools
+        if exam.status is not None:
+            old.status = exam.status
 
         exams_json = '['
         for key in self._examdict:
@@ -148,6 +160,7 @@ class ExamDAO:
                 status=item['status']
             )
             self._examdict[key] = exam
+
 
 if __name__ == '__main__':
     ''' Check if started directly '''

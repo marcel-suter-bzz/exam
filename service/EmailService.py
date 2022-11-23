@@ -4,6 +4,7 @@ from flask_restful import Resource, reqparse
 
 from data.ExamDAO import ExamDAO
 from data.EventDAO import EventDAO
+from data.PersonDAO import PersonDAO
 from util.authorization import token_required, teacher_required
 from util.replace import replace_text
 
@@ -70,6 +71,8 @@ class EmailService(Resource):
         """
         event_dao = EventDAO()
         event = event_dao.read_event(exam.event_uuid)
+        person_dao = PersonDAO()
+        chief_supervisor = person_dao.read_person(event.supervisors[0])
         filename = current_app.config['TEMPLATEPATH']
         subject = ''
         if status == 'pendent':
@@ -82,7 +85,7 @@ class EmailService(Resource):
             subject = 'Verpasste Prüfung'
         elif status == 'invitation':
             filename += 'invitation.txt'
-            sender = event.supervisors[0]
+            sender = chief_supervisor.email
             subject = 'Aufgebot zur Nachprüfung'
         file = open(filename, encoding='UTF-8')
         text = file.read()
@@ -91,6 +94,9 @@ class EmailService(Resource):
                 'teacher.firstname': exam.teacher.firstname,
                 'teacher.lastname': exam.teacher.lastname,
                 'teacher.email': exam.teacher.email,
+                'chief_supervisor.firstname': chief_supervisor.firstname,
+                'chief_supervisor.lastname': chief_supervisor.lastname,
+                'chief_supervisor.email': chief_supervisor.email,
                 'missed': exam.missed,
                 'module': exam.module,
                 'event.date': event.timestamp.split(' ')[0],
