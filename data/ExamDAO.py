@@ -16,28 +16,28 @@ def condition(exam, student, teacher, date, status):
     :param status
     :return: matches filter True/False
     """
-    match = True
     try:
         if student is not None and student != "":
             student = student.lower()
             if student not in exam.student.email.lower():
-                match = False
+                return False
         if teacher is not None and teacher != "":
             teacher = teacher.lower()
             if teacher not in exam.teacher.email.lower():
-                match = False
-        if date is not None and date != "all":
-            if date != exam.event_uuid:
-                match = False
-        if status is None or status == "":
-            status = "all"
-        elif status == "open" and exam.status not in ['pendent', 'offen', 'abgegeben', 'erhalten']:
-            match = False
-        elif status == "closed" and exam.status not in ['erledigt', 'pnab', 'gelöscht']:
-            match = False
+                return False
+        if date is not None and \
+                date != "all" and \
+                date != exam.event_uuid:
+            return False
+        if status is None or status == '':
+            status = 'all'
+        if exam.status in ['pendent', 'offen', 'abgegeben', 'erhalten'] and status not in ['open', 'all']:
+            return False
+        if exam.status in ['erledigt', 'pnab', 'gelöscht'] and status not in ['closed', 'all']:
+            return False
     except:
         print('Error in ExamDAO.condition')
-    return match
+    return True
 
 
 class ExamDAO:
