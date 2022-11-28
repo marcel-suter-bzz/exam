@@ -7,12 +7,12 @@ import json
 def condition(person, filter_value):
     """
     condition for filtering the examlist
-    :param person: an person object to be examined
+    :param person: a person object to be examined
     :param filter_value: the filter condition
     :return: matches filter True/False
     """
     filter_value = filter_value.lower()
-    if (filter_value in person.fullname.lower() ):
+    if filter_value in person.fullname.lower():
         return True
     return False
 

@@ -35,7 +35,7 @@ def condition(exam, student, teacher, date, status):
             return False
         if exam.status in ['erledigt', 'pnab', 'gelöscht'] and status not in ['closed', 'all']:
             return False
-    except:
+    except Exception:
         print('Error in ExamDAO.condition')
     return True
 

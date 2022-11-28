@@ -3,10 +3,9 @@ import json
 import jwt
 import requests
 from cryptography.hazmat.primitives import serialization
-from flask import make_response, jsonify, current_app, request, g
-from flask_restful import Resource, reqparse
+from flask import make_response, jsonify, current_app, request
+from flask_restful import Resource
 
-from data.PersonDAO import PersonDAO
 from util.authorization import make_access_token
 
 
@@ -16,15 +15,6 @@ class RefreshService(Resource):
 
     author: Marcel Suter
     """
-
-    def __init__(self):
-        """
-        constructor
-
-        Parameters:
-
-        """
-        pass
 
     def get(self, email):
         """
@@ -39,19 +29,17 @@ class RefreshService(Resource):
         if not token:
             return make_response(jsonify({"message": "A valid token is missing!"}), 401)
         try:
-            data = jwt.decode(token[7:], current_app.config['REFRESH_TOKEN_KEY'], algorithms=["HS256"])
+            jwt.decode(token[7:], current_app.config['REFRESH_TOKEN_KEY'], algorithms=["HS256"])
             access, role = make_access_token(email)
             return jsonify({
                 'access': access,
                 'email': email,
                 'role': role
             })
-        except:
+        except Exception:
             pass
 
         return make_response(jsonify({"message": "Invalid token!"}), 401)
-
-
 
 
 def decode_idtoken(token):
@@ -73,7 +61,7 @@ def decode_idtoken(token):
             format=serialization.PublicFormat.SubjectPublicKeyInfo
         )
 
-        decoded_token = jwt.decode(
+        jwt.decode(
             token,
             key=rsa_pem_key_bytes,
             verify=True,
@@ -81,9 +69,8 @@ def decode_idtoken(token):
             audience='8b113aa0-1d94-4f7b-a5e7-c7157e1c7b90',
             issuer="https://login.microsoftonline.com/12ea5aa9-906c-4d84-86d2-4713c6ae66d3/v2.0"
         )
-    except Exception as e:
+    except Exception:
         raise
-
 
 
 if __name__ == '__main__':

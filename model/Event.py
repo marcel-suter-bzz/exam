@@ -24,7 +24,6 @@ class Event:
                   '"rooms":' + json.dumps(self.rooms) + '}'
         return jstring
 
-
     @property
     def event_uuid(self):
         return self._event_uuid
@@ -56,6 +55,8 @@ class Event:
     @supervisors.setter
     def supervisors(self, value):
         self._supervisors = value
+
+
 if __name__ == '__main__':
     ''' Check if started directly '''
     pass

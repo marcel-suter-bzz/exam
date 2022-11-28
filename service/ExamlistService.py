@@ -33,7 +33,7 @@ class ExamlistService(Resource):
         """
         args = self.parser.parse_args()
 
-        if (g.user.role != 'teacher'):
+        if g.user.role != 'teacher':
             args['student'] = g.user.email
             args['teacher'] = ''
             args['date'] = ''

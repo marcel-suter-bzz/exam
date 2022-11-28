@@ -1,5 +1,4 @@
 import json
-import uuid
 from dateutil import parser
 from flask import current_app
 

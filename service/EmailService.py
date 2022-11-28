@@ -27,19 +27,20 @@ class EmailService(Resource):
 
     @token_required
     @teacher_required
-    def get(self, exam_uuid, type):
+    def get(self, exam_uuid, email_type):
         """
         sends an email
         :param exam_uuid: the unique key
-        :param type: the type of email to be sent
+        :param email_type: the type of email to be sent
         :return: http response
         """
         exam_dao = ExamDAO()
         exam = exam_dao.read_exam(exam_uuid)
         http_status = 404
         if exam is not None:
-            self.create_email(exam, type)
-        return make_response('email sent', 200)
+            self.create_email(exam, email_type)
+            http_status = 200
+        return make_response('email sent', http_status)
 
     @token_required
     @teacher_required
@@ -75,6 +76,7 @@ class EmailService(Resource):
         chief_supervisor = person_dao.read_person(event.supervisors[0])
         filename = current_app.config['TEMPLATEPATH']
         subject = ''
+        sender = ''
         if status == 'pendent':
             filename += 'missed.txt'
             sender = exam.teacher.email
@@ -109,14 +111,14 @@ class EmailService(Resource):
         return True
 
     def send_email(self, sender, recipient, subject, content):
-        '''
+        """
         sends an email
         :param sender: email address of the sender
         :param recipient:  email address of the recipient
         :param subject: subject of the email
         :param content: email text
         :return: None
-        '''
+        """
 
         mail = Mail(current_app)
         msg = Message(subject, sender=sender, recipients=[recipient], reply_to=sender)

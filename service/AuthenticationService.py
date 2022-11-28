@@ -5,10 +5,9 @@ from datetime import datetime, timedelta
 import jwt
 import requests
 from cryptography.hazmat.primitives import serialization
-from flask import make_response, jsonify, current_app, request, g
+from flask import make_response, jsonify, current_app as app, request
 from flask_restful import Resource, reqparse
 
-from data.PersonDAO import PersonDAO
 from util.authorization import make_access_token
 
 parser = reqparse.RequestParser()
@@ -42,19 +41,18 @@ class AuthenticationService(Resource):
             token = request.headers['Authorization']
 
         if not token:
+            app.logger.info("A valid token is missing!")
             return make_response(jsonify({"message": "A valid token is missing!"}), 401)
         try:
             decoded_token = decode_idtoken(token[7:])
             email = decoded_token['email']
-            #person_dao = PersonDAO()
-            #g.user = person_dao.read_person(email)
             access, role = make_access_token(email)
 
             if access is not None:
                 refresh = jwt.encode({
                     'exp': datetime.utcnow() + timedelta(minutes=60)
                 },
-                    current_app.config['REFRESH_TOKEN_KEY'], "HS256"
+                    app.config['REFRESH_TOKEN_KEY'], "HS256"
                 )
 
                 return jsonify({
@@ -66,10 +64,17 @@ class AuthenticationService(Resource):
 
             return make_response('could not verify', 404, {'Authentication': '"login failed"'})
 
-        except:
+        except Exception:
+            app.logger.info("Invalid token!")
             return make_response(jsonify({"message": "EXAM/login: Invalid token!"}), 401)
 
+
 def decode_idtoken(token):
+    """
+    decodes the id token from MSAL
+    :param token:
+    :return:
+    """
     try:
         response = requests.get("https://login.microsoftonline.com/common/discovery/keys")
         keys = response.json()['keys']
@@ -98,10 +103,8 @@ def decode_idtoken(token):
         )
         return decoded_token
     except Exception as e:
-        logging.exception("EXAM: Error in jwt.decode")
-        logging.exception(str(e))
+        app.logger.info("Error in jwt.decode")
         raise
-
 
 
 if __name__ == '__main__':

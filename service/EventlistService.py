@@ -12,15 +12,6 @@ class EventlistService(Resource):
     author: Marcel Suter
     """
 
-    def __init__(self):
-        """
-        constructor
-
-        Parameters:
-
-        """
-        pass
-
     @token_required
     def get(self, date=None):
         """

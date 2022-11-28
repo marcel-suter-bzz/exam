@@ -1,4 +1,6 @@
 import datetime
+
+
 def replace_text(data, text):
     """
     replace a placeholder with data

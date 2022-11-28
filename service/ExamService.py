@@ -1,12 +1,13 @@
 import uuid
 
 from flask import make_response
-from flask_restful import Resource, fields, reqparse
+from flask_restful import Resource, reqparse
 
 from data.PersonDAO import PersonDAO
 from util.authorization import token_required, teacher_required
 from data.ExamDAO import ExamDAO
 from model.Exam import Exam
+
 
 class ExamService(Resource):
     """
@@ -78,7 +79,7 @@ class ExamService(Resource):
         self.save(args)
         return make_response('exam saved', 200)
 
-    def save(self,args):
+    def save(self, args):
         """
         saves the new or updated exam
         :param args:
@@ -112,6 +113,7 @@ class ExamService(Resource):
         )
 
         exam_dao.save_exam(exam)
+
 
 if __name__ == '__main__':
     ''' Check if started directly '''

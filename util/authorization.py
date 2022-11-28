@@ -25,7 +25,7 @@ def token_required(func):
             email = data['email']
             person_dao = PersonDAO()
             g.user = person_dao.read_person(email)
-        except:
+        except Exception:
             return make_response(jsonify({"message": "EXAM/auth: Invalid token!"}), 401)
 
         return func(*args, **kwargs)
@@ -41,6 +41,7 @@ def teacher_required(func):
         return func(*args, **kwargs)
 
     return wrap
+
 
 def make_access_token(email):
     """
@@ -61,6 +62,7 @@ def make_access_token(email):
         return access, person.role
     else:
         return None, "guest"
+
 
 if __name__ == '__main__':
     ''' Check if started directly '''

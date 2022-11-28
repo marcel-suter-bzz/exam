@@ -47,7 +47,7 @@ class PrintService(Resource):
             pdf.set_fill_color(r=192, g=192, b=192)
             pdf.set_line_width(0.5)
             data = self.build_dict(exam)
-            self.make_page(exam, data, texts, pdf)
+            self.make_page(data, texts, pdf)
             response = make_response(pdf.output())
             response.headers["Content-Type"] = "application/pdf"
             return response
@@ -63,13 +63,13 @@ class PrintService(Resource):
         args = self.parser.parse_args()
         exam_uuids = []
         for arg in args['exam_uuid']:
-            uuid = ''
+            exam_uuid = ''
             if isinstance(arg, list):
                 for c in arg:
-                    uuid += c
+                    exam_uuid += c
             else:
-                uuid = arg
-            exam_uuids.append(uuid)
+                exam_uuid = arg
+            exam_uuids.append(exam_uuid)
 
         response = make_response(
             self.build_pdf(exam_uuids)
@@ -94,16 +94,17 @@ class PrintService(Resource):
             exam = exam_dao.read_exam(exam_uuid)
             if exam is not None:
                 data = self.build_dict(exam)
-                self.make_page(exam, data, texts, pdf)
+                self.make_page(data, texts, pdf)
         pdf_filename = uuid.uuid4().hex + '.pdf'
         pdf.output(current_app.config['OUTPUTPATH'] + pdf_filename)
         return pdf_filename
 
-    def make_page(self, exam, data, texts, pdf):
+    def make_page(self, data, texts, pdf):
         """
         makes a pdf page for the exam
-        :param exam:
-        :param pdf:
+        :param data: dict with placeholders and data values
+        :param texts: the text elements
+        :param pdf: the pdf object
         :return:
         """
         margin_left = 15

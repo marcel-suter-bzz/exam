@@ -8,7 +8,7 @@ from model.Person import Person
 @dataclass
 class Exam(dict):
     """
-    a exam to be taken
+    an exam to be taken
     
     author: Marcel Suter
     """
