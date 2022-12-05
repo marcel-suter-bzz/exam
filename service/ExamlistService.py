@@ -41,17 +41,20 @@ class ExamlistService(Resource):
 
         exam_dao = ExamDAO()
         examlist = exam_dao.filtered_list(args['student'], args['teacher'], args['date'], args['status'])
-        exams_json = '['
-        for exam in examlist:
-            data = exam.to_json()
-            exams_json += data + ','
-        if len(exams_json) > 1:
+        if len(examlist) > 0:
+            exams_json = '['
+            for exam in examlist:
+                data = exam.to_json()
+                exams_json += data + ','
             exams_json = exams_json[:-1] + ']'
+            return make_response(
+                exams_json, 200
+            )
         else:
-            exams_json = "[]"
-        return make_response(
-            exams_json, 200
-        )
+            return make_response(
+                '[]', 404
+            )
+
 
 
 if __name__ == '__main__':
