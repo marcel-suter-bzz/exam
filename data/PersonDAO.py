@@ -4,17 +4,19 @@ from model.Person import Person
 import json
 
 
-def condition(person, filter_value):
+def condition(person, filter_name, filter_role):
     """
     condition for filtering the examlist
     :param person: a person object to be examined
-    :param filter_value: the filter condition
+    :param filter_name: the filter condition
     :return: matches filter True/False
     """
-    filter_value = filter_value.lower()
-    if filter_value in person.fullname.lower():
-        return True
-    return False
+    filter_name = filter_name.lower()
+    if filter_name not in person.fullname.lower():
+        return False
+    if filter_role != 'all' and filter_role != person.role:
+        return False
+    return True
 
 
 class PersonDAO:
@@ -34,16 +36,17 @@ class PersonDAO:
         self._peopledict = {}
         self.load_people()
 
-    def filtered_list(self, filter_value):
+    def filtered_list(self, filter_name, filter_role):
         """
         returns the filtered list of people
-        :param filter_value: the filter to be applied
+        :param filter_name: the filter for the name
+        :param filter_role: the filter for the role
         :return: list of people
         """
 
         filtered = []
         for (key, person) in self._peopledict.items():
-            if condition(person, filter_value):
+            if condition(person, filter_name, filter_role):
                 filtered.append(person)
         return filtered
 

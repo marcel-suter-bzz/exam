@@ -23,15 +23,16 @@ class PeoplelistService(Resource):
         pass
 
     @teacher_required
-    def get(self, filter_value):
+    def get(self, filter_name, filter_role='all'):
         """
         get a list of people
-        :param filter_value: the filter to be applied
+        :param filter_value: the filter for the name
+        :param filter_role: the filter for the role
         :return: JSON object with the people
         """
-        filter_value.replace(' ', '%20')
+        filter_name.replace(' ', '%20')
         person_dao = PersonDAO()
-        peoplelist = person_dao.filtered_list(filter_value)
+        peoplelist = person_dao.filtered_list(filter_name, filter_role)
         people_json = ' '
         for person in peoplelist:
             data = person.to_json()
