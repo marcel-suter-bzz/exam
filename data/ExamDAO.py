@@ -47,7 +47,7 @@ class ExamDAO:
     author: Marcel Suter
     """
 
-    def __init__(self, examlist=''):
+    def __init__(self):
         """
         constructor
 

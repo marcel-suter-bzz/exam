@@ -12,14 +12,26 @@ class Person(dict):
     email: str
     firstname: str = ' '
     lastname: str = ' '
+    department: str = ' '
     role: str = ' '
 
     def to_json(self):
-        person_json = '{"email":"' + self.email + '",' + \
-                      '"firstname": "' + self.firstname + '", ' + \
-                      '"lastname": "' + self.lastname + '", ' + \
-                      '"fullname": "' + self.fullname + '", ' + \
-                      '"role": "' + self.role + '"}'
+        person_json = '{{' \
+                   '"email": "{email}",' \
+                   '"firstname": "{firstname}",' \
+                   '"lastname": "{lastname}",' \
+                   '"fullname": "{fullname}",' \
+                   '"department":"{department}",' \
+                   '"role":"{role}"' \
+                   '}}' \
+            .format(
+                email=self.email,
+                firstname=self.firstname,
+                lastname=self.lastname,
+                fullname=self.fullname,
+                department=self.department,
+                role=self.role
+            )
         return person_json
 
     @property
@@ -57,3 +69,14 @@ class Person(dict):
     @role.setter
     def role(self, value):
         self._role = value
+
+    @property
+    def department(self):
+        return self._department
+
+    @department.setter
+    def department(self, value):
+        if value is None:
+            self._department = ''
+        else:
+            self._department = value

@@ -7,6 +7,7 @@ import json
 def condition(person, filter_name, filter_role):
     """
     condition for filtering the examlist
+    :param filter_role:
     :param person: a person object to be examined
     :param filter_name: the filter condition
     :return: matches filter True/False
@@ -77,6 +78,7 @@ class PersonDAO:
                 item['email'],
                 item['firstname'],
                 item['lastname'],
+                item['department'],
                 item['role']
             )
             self._peopledict[key] = person

@@ -65,8 +65,10 @@ class ExamService(Resource):
         :return: http response
         """
         args = self.parser.parse_args()
-        self.save(args)
-        return make_response('exam saved', 201)
+        if self.save(args):
+            return make_response('exam saved', 201)
+        else:
+            return make_response('missing parameters', 400)
 
     @token_required
     @teacher_required
@@ -76,8 +78,10 @@ class ExamService(Resource):
         :return:
         """
         args = self.parser.parse_args()
-        self.save(args)
-        return make_response('exam saved', 200)
+        if self.save(args):
+            return make_response('exam saved', 201)
+        else:
+            return make_response('missing parameters', 400)
 
     def save(self, args):
         """
@@ -93,6 +97,8 @@ class ExamService(Resource):
         student = None
         if args.student is not None:
             student = person_dao.read_person(args.student)
+        if teacher is None or student is None:
+            return False
 
         if args.exam_uuid is None or args.exam_uuid == '':
             args.exam_uuid = str(uuid.uuid4())
@@ -113,7 +119,7 @@ class ExamService(Resource):
         )
 
         exam_dao.save_exam(exam)
-
+        return True
 
 if __name__ == '__main__':
     ''' Check if started directly '''

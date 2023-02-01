@@ -26,7 +26,7 @@ class PeoplelistService(Resource):
     def get(self, filter_name, filter_role='all'):
         """
         get a list of people
-        :param filter_value: the filter for the name
+        :param filter_name:
         :param filter_role: the filter for the role
         :return: JSON object with the people
         """

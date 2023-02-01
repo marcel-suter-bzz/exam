@@ -34,11 +34,11 @@ class Event:
 
     @property
     def timestamp(self):
-        return self._datetime.strftime("%d.%m.%Y %H:%M")
+        return self._datetime
 
     @timestamp.setter
     def timestamp(self, value):
-        self._datetime = parser.parse(value)
+        self._datetime = value
 
     @property
     def rooms(self):

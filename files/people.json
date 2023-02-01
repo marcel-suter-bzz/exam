@@ -3,354 +3,413 @@
     "email": "m.nagato@bzz.local",
     "firstname": "Maria",
     "lastname": "Nagato",
+    "department": "",
     "role": "teacher"
   },
   {
     "email": "n.oberon@bzz.local",
     "firstname": "Nick",
     "lastname": "Oberon",
+    "department": "",
     "role": "teacher"
   },
   {
     "email": "i.kagero@bzz.local",
     "firstname": "Irma",
     "lastname": "Kagero",
+    "department": "",
     "role": "teacher"
   },
   {
     "email": "k.leim@bzz.local",
     "firstname": "Karl",
     "lastname": "Leim",
+    "department": "",
     "role": "teacher"
   },
   {
     "email": "b.arnheim@bzz.local",
     "firstname": "Beata",
     "lastname": "Arnheim",
+    "department": "",
     "role": "teacher"
   },
   {
     "email": "h.ise@bzz.local",
     "firstname": "Hans",
     "lastname": "Ise",
+    "department": "",
     "role": "teacher"
   },
   {
     "email": "g.haragumo@bzz.local",
     "firstname": "Gerda",
     "lastname": "Haragumo",
+    "department": "",
     "role": "teacher"
   },
   {
     "email": "l.maya@bzz.local",
     "firstname": "Laura",
     "lastname": "Maya",
+    "department": "",
     "role": "teacher"
   },
   {
     "email": "e.daring@bzz.local",
     "firstname": "Emil",
     "lastname": "Daring",
+    "department": "",
     "role": "teacher"
   },
   {
     "email": "f.elbing@bzz.local",
     "firstname": "Fiona",
     "lastname": "Elbing",
+    "department": "",
     "role": "teacher"
   },
   {
     "email": "c.benson@bzz.local",
     "firstname": "Carla",
     "lastname": "Benson",
+    "department": "",
     "role": "teacher"
   },
   {
     "email": "Lo.Fl@bzz.local",
     "firstname": "",
     "lastname": "Fl Lo",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Fa.No@bzz.local",
     "firstname": "",
     "lastname": "No Fa",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Ra.Pa@bzz.local",
     "firstname": "",
     "lastname": "Pa Ra",
+    "department": "",
     "role": "student"
   },
   {
     "email": "No.Sc@bzz.local",
     "firstname": "",
     "lastname": "Sc No",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Si.De@bzz.local",
     "firstname": "",
     "lastname": "De Si",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Yo.Ze@bzz.local",
     "firstname": "",
     "lastname": "Ze Yo",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Lo.Ma@bzz.local",
     "firstname": "",
     "lastname": "Ma Lo",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Sa.Ni@bzz.local",
     "firstname": "",
     "lastname": "Ni Sa",
+    "department": "",
     "role": "student"
   },
   {
     "email": "No.Ha@bzz.local",
     "firstname": "",
     "lastname": "Ha No",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Na.Am@bzz.local",
     "firstname": "",
     "lastname": "Am Na",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Mi.Di@bzz.local",
     "firstname": "",
     "lastname": "Di Mi",
+    "department": "",
     "role": "student"
   },
   {
     "email": "El.La@bzz.local",
     "firstname": "",
     "lastname": "La El",
+    "department": "",
     "role": "student"
   },
   {
     "email": "iv.Go@bzz.local",
     "firstname": "",
     "lastname": "Go iv",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Fr.Fe@bzz.local",
     "firstname": "",
     "lastname": "Fe Fr",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Ph.Ry@bzz.local",
     "firstname": "",
     "lastname": "Ry Ph",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Ar.Ti@bzz.local",
     "firstname": "",
     "lastname": "Ti Ar",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Di.Fa@bzz.local",
     "firstname": "",
     "lastname": "Fa Di",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Mo.Ha@bzz.local",
     "firstname": "",
     "lastname": "Ha Mo",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Ju.Ja@bzz.local",
     "firstname": "",
     "lastname": "Ja Ju",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Ma.Jo@bzz.local",
     "firstname": "",
     "lastname": "Jo Ma",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Me.Aj@bzz.local",
     "firstname": "",
     "lastname": "Aj Me",
+    "department": "",
     "role": "student"
   },
   {
     "email": "An.De@bzz.local",
     "firstname": "",
     "lastname": "De An",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Cu.Ka@bzz.local",
     "firstname": "",
     "lastname": "Ka Cu",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Fe.Pa@bzz.local",
     "firstname": "",
     "lastname": "Pa Fe",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Al.Ve@bzz.local",
     "firstname": "",
     "lastname": "Ve Al",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Ka.Be@bzz.local",
     "firstname": "",
     "lastname": "Be Ka",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Al.Bu@bzz.local",
     "firstname": "",
     "lastname": "Bu Al",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Is.Co@bzz.local",
     "firstname": "",
     "lastname": "Co Is",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Na.Ge@bzz.local",
     "firstname": "",
     "lastname": "Ge Na",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Ph.Gr@bzz.local",
     "firstname": "",
     "lastname": "Gr Ph",
+    "department": "",
     "role": "student"
   },
   {
     "email": "An.Ka@bzz.local",
     "firstname": "",
     "lastname": "Ka An",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Lu.Oe@bzz.local",
     "firstname": "",
     "lastname": "Oe Lu",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Er.Qu@bzz.local",
     "firstname": "",
     "lastname": "Qu Er",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Ch.Sa@bzz.local",
     "firstname": "",
     "lastname": "Sa Ch",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Bl.Sh@bzz.local",
     "firstname": "",
     "lastname": "Sh Bl",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Da.Re@bzz.local",
     "firstname": "",
     "lastname": "Re Da",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Li.Ew@bzz.local",
     "firstname": "",
     "lastname": "Ew Li",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Da.Ra@bzz.local",
     "firstname": "",
     "lastname": "Ra Da",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Ra.Sc@bzz.local",
     "firstname": "",
     "lastname": "Sc Ra",
+    "department": "",
     "role": "student"
   },
   {
     "email": "El.St@bzz.local",
     "firstname": "",
     "lastname": "St El",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Sv.Gi@bzz.local",
     "firstname": "",
     "lastname": "Gi Sv",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Cy.Sh@bzz.local",
     "firstname": "",
     "lastname": "Sh Cy",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Mo.Le@bzz.local",
     "firstname": "",
     "lastname": "Le Mo",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Ma.Wo@bzz.local",
     "firstname": "",
     "lastname": "Wo Ma",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Va.Wo@bzz.local",
     "firstname": "",
     "lastname": "Wo Va",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Li.We@bzz.local",
     "firstname": "",
     "lastname": "We Li",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Muster",
     "firstname": "muha@bzz.local",
     "lastname": "Hans",
+    "department": "",
     "role": "student"
   },
   {
     "email": "Marcel.Suter@bzz.ch",
     "firstname": "Marcel",
     "lastname": "Suter",
+    "department": "",
     "role": "teacher"
   }
 ]
