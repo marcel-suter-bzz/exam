@@ -1,4 +1,6 @@
-from flask import make_response, current_app
+from datetime import datetime
+
+from flask import make_response, current_app, jsonify
 from flask_mail import Mail, Message
 from flask_restful import Resource, reqparse
 
@@ -40,7 +42,7 @@ class EmailService(Resource):
         if exam is not None:
             self.create_email(exam, type)
             http_status = 200
-        return make_response('email sent', http_status)
+        return make_response(jsonify({'message':'email sent'}), http_status)
 
     @token_required
     @teacher_required
@@ -61,7 +63,7 @@ class EmailService(Resource):
             exam = exam_dao.read_exam(uuid)
             if exam is not None:
                 self.create_email(exam, 'invitation')
-        return make_response('email sent', 200)
+        return make_response(jsonify({'message':'email sent'}), 200)
 
     def create_email(self, exam, status):
         """
@@ -91,6 +93,7 @@ class EmailService(Resource):
             subject = 'Aufgebot zur Nachprüfung'
         file = open(filename, encoding='UTF-8')
         text = file.read()
+        event_ts = datetime.strptime(event.timestamp, "%Y-%m-%d %H:%M:%S")
         data = {'student.firstname': exam.student.firstname,
                 'student.lastname': exam.student.lastname,
                 'teacher.firstname': exam.teacher.firstname,
@@ -101,8 +104,8 @@ class EmailService(Resource):
                 'chief_supervisor.email': chief_supervisor.email,
                 'missed': exam.missed,
                 'module': exam.module,
-                'event.date': event.timestamp.split(' ')[0],
-                'event.time': event.timestamp.split(' ')[1],
+                'event.date': event_ts.strftime("%d.%m.%Y"),
+                'event.time': event_ts.strftime("%H:%M:%S"),
                 'room': exam.room,
                 'tools': exam.tools
                 }
@@ -121,7 +124,12 @@ class EmailService(Resource):
         """
 
         mail = Mail(current_app)
-        msg = Message(subject, sender=sender, recipients=[recipient], reply_to=sender)
+        msg = Message(
+            subject,
+            sender='fgit@bzz.ch',  #sender,
+            recipients=[recipient],
+            reply_to=sender
+        )
         msg.body = content
         mail.send(msg)
         '''
