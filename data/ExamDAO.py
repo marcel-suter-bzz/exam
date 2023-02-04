@@ -1,4 +1,5 @@
 import json
+import logging
 
 from flask import current_app
 
@@ -121,15 +122,19 @@ class ExamDAO:
         if exam.status is not None:
             old.status = exam.status
 
-        exams_json = '['
-        for key in self._examdict:
-            data = self._examdict[key].to_json(False)
-            exams_json += data + ','
-        exams_json = exams_json[:-1] + ']'
+        try:
+            exams_json = '['
+            for key in self._examdict:
+                data = self._examdict[key].to_json(False)
+                if data != '{}':
+                    exams_json += data + ','
+            exams_json = exams_json[:-1] + ']'
 
-        file = open(current_app.config['DATAPATH'] + 'exams.json', 'w', encoding='UTF-8')
-        file.write(exams_json)
-        file.close()
+            file = open(current_app.config['DATAPATH'] + 'exams.json', 'w', encoding='UTF-8')
+            file.write(exams_json)
+            file.close()
+        except ValueError:
+            pass
 
     def load_exams(self):
         """
@@ -141,25 +146,29 @@ class ExamDAO:
         file = open(current_app.config['DATAPATH'] + 'exams.json', encoding='UTF-8')
         exams = json.load(file)
         for item in exams:
-            key = item['exam_uuid']
-            teacher = person_dao.read_person(item['teacher'])
-            student = person_dao.read_person(item['student'])
-            exam = Exam(
-                exam_uuid=item['exam_uuid'],
-                event_uuid=item['event_uuid'],
-                teacher=teacher,
-                student=student,
-                cohort=item['cohort'],
-                module=item['module'],
-                exam_num=item['exam_num'],
-                missed=item['missed'],
-                duration=item['duration'],
-                room=item['room'],
-                remarks=item['remarks'],
-                tools=item['tools'],
-                status=item['status']
-            )
-            self._examdict[key] = exam
+            try:
+                key = item['exam_uuid']
+                teacher = person_dao.read_person(item['teacher'])
+                student = person_dao.read_person(item['student'])
+                exam = Exam(
+                    exam_uuid=item['exam_uuid'],
+                    event_uuid=item['event_uuid'],
+                    teacher=teacher,
+                    student=student,
+                    cohort=item['cohort'],
+                    module=item['module'],
+                    exam_num=item['exam_num'],
+                    missed=item['missed'],
+                    duration=item['duration'],
+                    room=item['room'],
+                    remarks=item['remarks'],
+                    tools=item['tools'],
+                    status=item['status']
+                )
+                self._examdict[key] = exam
+            except KeyError:
+                logging.exception("An exception was thrown!")
+                logging.exception('item: ' + item)
 
 
 if __name__ == '__main__':

@@ -51,8 +51,7 @@ class Exam(dict):
         except Exception as e:
             logging.exception("An exception was thrown!")
             logging.exception('exam_uuid: ' + self.exam_uuid)
-            print('Error')
-            return '{}'
+            raise ValueError
 
     @property
     def exam_uuid(self):
