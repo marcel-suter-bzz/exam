@@ -91,35 +91,44 @@ class ExamService(Resource):
         """
         exam_dao = ExamDAO()
         person_dao = PersonDAO()
-        teacher = None
-        if args.teacher is not None:
-            teacher = person_dao.read_person(args.teacher)
-        student = None
-        if args.student is not None:
-            student = person_dao.read_person(args.student)
-        if teacher is None or student is None:
-            return False
 
         if args.exam_uuid is None or args.exam_uuid == '':
             args.exam_uuid = str(uuid.uuid4())
-        exam = Exam(
-            exam_uuid=args.exam_uuid,
-            teacher=teacher,
-            student=student,
-            cohort=args.cohort,
-            module=args.module,
-            exam_num=args.exam_num,
-            duration=args.duration,
-            missed=args.missed,
-            room=args.room,
-            remarks=args.remarks,
-            tools=args.tools,
-            event_uuid=args.event_uuid,
-            status=args.status
-        )
+            exam = Exam()
+        else:
+            exam = exam_dao.read_exam(args.exam_uuid)
 
-        exam_dao.save_exam(exam)
-        return True
+        if args.event_uuid is not None:
+            exam.event_uuid = args.event_uuid
+        if args.teacher is not None:
+            exam.teacher = person_dao.read_person(args.teacher)
+        if args.student is not None:
+            exam.student = person_dao.read_person(args.student)
+        if args.cohort is not None:
+            exam.cohort = args.cohort
+        if args.module is not None:
+            exam.module = args.module
+        if args.exam_num is not None:
+            exam.exam_num = args.exam_num
+        if args.missed is not None:
+            exam.missed = args.missed
+        if args.duration is not None:
+            exam.duration = args.duration
+        if args.room is not None:
+            exam.room = args.room
+        if args.remarks is not None:
+            exam.remarks = args.remarks
+        if args.tools is not None:
+            exam.tools = args.tools
+        if args.status is not None:
+            exam.status = args.status
+
+        try:
+            exam_dao.save_exam(exam)
+            return True
+        except ValueError as e:
+            return False
+
 
 if __name__ == '__main__':
     ''' Check if started directly '''

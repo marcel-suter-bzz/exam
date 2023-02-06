@@ -34,7 +34,7 @@ def condition(exam, student, teacher, date, status):
             status = 'all'
         if exam.status in ['pendent', 'offen', 'abgegeben', 'erhalten'] and status not in ['open', 'all']:
             return False
-        if exam.status in ['erledigt', 'pnab', 'gelöscht'] and status not in ['closed', 'all']:
+        if exam.status in ['erledigt', 'pnab', 'geloescht'] and status not in ['closed', 'all']:
             return False
     except Exception:
         print('Error in ExamDAO.condition')
@@ -93,34 +93,7 @@ class ExamDAO:
         :param exam:
         :return:
         """
-        if exam.exam_uuid not in self._examdict:
-            self._examdict[exam.exam_uuid] = exam
-        old = self._examdict[exam.exam_uuid]
-
-        if exam.event_uuid is not None:
-            old.event_uuid = exam.event_uuid
-        if exam.student is not None:
-            old.student = exam.student
-        if exam.teacher is not None:
-            old.teacher = exam.teacher
-        if exam.cohort is not None:
-            old.cohort = exam.cohort
-        if exam.module is not None:
-            old.module = exam.module
-        if exam.exam_num is not None:
-            old.exam_num = exam.exam_num
-        if exam.missed is not None:
-            old.missed = exam.missed
-        if exam.duration is not None and exam.duration != 0:
-            old.duration = exam.duration
-        if exam.room is not None:
-            old.room = exam.room
-        if exam.remarks is not None:
-            old.remarks = exam.remarks
-        if exam.tools is not None:
-            old.tools = exam.tools
-        if exam.status is not None:
-            old.status = exam.status
+        self._examdict[exam.exam_uuid] = exam
 
         try:
             exams_json = '['
@@ -129,12 +102,12 @@ class ExamDAO:
                 if data != '{}':
                     exams_json += data + ','
             exams_json = exams_json[:-1] + ']'
-
-            file = open(current_app.config['DATAPATH'] + 'exams.json', 'w', encoding='UTF-8')
-            file.write(exams_json)
-            file.close()
         except ValueError:
-            pass
+            raise
+        file = open(current_app.config['DATAPATH'] + 'exams.json', 'w', encoding='UTF-8')
+        file.write(exams_json)
+        file.close()
+
 
     def load_exams(self):
         """
