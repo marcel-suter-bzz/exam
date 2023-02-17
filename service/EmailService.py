@@ -75,17 +75,16 @@ class EmailService(Resource):
         person_dao = PersonDAO()
         chief_supervisor = person_dao.read_person(event.supervisors[0])
         filename = current_app.config['TEMPLATEPATH']
-        subject = ''
-        sender = ''
-        if status == 'pendent':
+
+        if status == '10':
             filename += 'missed.txt'
             sender = exam.teacher.email
             subject = 'Verpasste Prüfung'
-        elif status == 'offen':
+        elif status == '20':
             filename += 'missed2.txt'
             sender = exam.teacher.email
             subject = 'Verpasste Prüfung'
-        elif status == 'invitation':
+        else:
             filename += 'invitation.txt'
             sender = chief_supervisor.email
             subject = 'Aufgebot zur Nachprüfung'

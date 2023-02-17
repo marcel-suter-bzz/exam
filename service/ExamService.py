@@ -97,8 +97,6 @@ class ExamService(Resource):
         student = None
         if args.student is not None:
             student = person_dao.read_person(args.student)
-        if teacher is None or student is None:
-            return False
 
         if args.exam_uuid is None or args.exam_uuid == '':
             args.exam_uuid = str(uuid.uuid4())

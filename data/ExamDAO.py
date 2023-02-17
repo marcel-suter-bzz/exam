@@ -18,12 +18,12 @@ def condition(exam, student, teacher, date, status):
     """
     try:
         if student is not None and student != "":
-            student = student.lower()
-            if student not in exam.student.email.lower():
+            if student.lower() not in exam.student.fullname.lower() and \
+                    student.lower() not in exam.student.email.lower():
                 return False
         if teacher is not None and teacher != "":
-            teacher = teacher.lower()
-            if teacher not in exam.teacher.email.lower():
+            if teacher.lower() not in exam.teacher.fullname.lower() and \
+                    teacher.lower() not in exam.teacher.email.lower():
                 return False
         if date is not None and \
                 date != "all" and \
@@ -31,9 +31,9 @@ def condition(exam, student, teacher, date, status):
             return False
         if status is None or status == '':
             status = 'all'
-        if exam.status in ['pendent', 'offen', 'abgegeben', 'erhalten'] and status not in ['open', 'all']:
+        if exam.status in ['10', '20', '30', '40'] and status not in ['open', 'all']:
             return False
-        if exam.status in ['erledigt', 'pnab', 'gelöscht'] and status not in ['closed', 'all']:
+        if exam.status in ['50', '80', '90'] and status not in ['closed', 'all']:
             return False
     except Exception:
         print('Error in ExamDAO.condition')
