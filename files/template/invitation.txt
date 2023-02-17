@@ -11,8 +11,8 @@ Sie haben am {{missed}} im Modul {{module}} während der Leistungsbeurteilung ge
 
 Hinweise:
 - Falls Sie mehr als eine Prüfung schreiben müssen, können Sie zwischen den Prüfungen jeweils 5-10 Minuten Pausen machen. Nehmen Sie allenfalls einen Znüni und etwas zu trinken mit.
-- Absenzen müssen mit einem Arztzeugnis oder einer gültigen Dispensation belegt werden.
 - Falls Sie am Prüfungstag unerwartet verhindert sein sollten, melden Sie Ihr Fernbleiben über Teams oder E-Mail an {{supervisor}}.
+- Absenzen müssen mit einem Arztzeugnis oder einer gültigen Dispensation belegt werden.
 
 Freundliche Grüsse
 
