@@ -4,6 +4,7 @@ from flask import current_app
 
 from data.PersonDAO import PersonDAO
 from model.Exam import Exam
+from model.Person import Person
 
 
 def condition(exam, student, teacher, date, status):
@@ -144,6 +145,7 @@ class ExamDAO:
             key = item['exam_uuid']
             teacher = person_dao.read_person(item['teacher'])
             student = person_dao.read_person(item['student'])
+
             exam = Exam(
                 exam_uuid=item['exam_uuid'],
                 event_uuid=item['event_uuid'],

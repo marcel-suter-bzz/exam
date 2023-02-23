@@ -57,12 +57,16 @@ class PersonDAO:
         :param email:
         :return: Person object
         """
-        person = None
         for (key, item) in self._peopledict.items():
 
             if key.casefold() == email.casefold():
                 return item
-        return person
+        return  Person(
+                    email,
+                    '***Konto gelöscht***',
+                    email,
+                    'student'
+                )
 
     def load_people(self):
         """

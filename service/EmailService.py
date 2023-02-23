@@ -100,8 +100,8 @@ class EmailService(Resource):
                 'chief_supervisor.email': chief_supervisor.email,
                 'missed': exam.missed,
                 'module': exam.module,
-                'event.date': event.timestamp.split(' ')[0],
-                'event.time': event.timestamp.split(' ')[1],
+                'event.date': f'{event.timestamp[8:10]}.{event.timestamp[5:7]}.{event.timestamp[0:4]}',
+                'event.time': f'{event.timestamp[14:19]}',
                 'room': exam.room,
                 'tools': exam.tools
                 }
