@@ -1,5 +1,8 @@
+import json
 from functools import wraps
 import jwt
+import requests
+from cryptography.hazmat.primitives import serialization
 from flask import jsonify, request, make_response, g, current_app
 from data.PersonDAO import PersonDAO
 from datetime import datetime, timedelta
@@ -62,6 +65,31 @@ def make_access_token(email):
         return access, person.role
     else:
         return None, "guest"
+
+
+def read_keys(token):
+    """
+    reads the ms keys for the token
+    :param token: the token
+    :return:
+    """
+    response = requests.get("https://login.microsoftonline.com/common/discovery/keys")
+    keys = response.json()['keys']
+
+    token_headers = jwt.get_unverified_header(token)
+    token_alg = token_headers['alg']
+    token_kid = token_headers['kid']
+    public_key = None
+    for key in keys:
+        if key['kid'] == token_kid:
+            public_key = key
+
+    rsa_pem_key = jwt.algorithms.RSAAlgorithm.from_jwk(json.dumps(public_key))
+    rsa_pem_key_bytes = rsa_pem_key.public_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PublicFormat.SubjectPublicKeyInfo
+    )
+    return rsa_pem_key_bytes, token_alg
 
 
 if __name__ == '__main__':

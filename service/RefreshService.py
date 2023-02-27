@@ -1,12 +1,8 @@
-import json
-
 import jwt
-import requests
-from cryptography.hazmat.primitives import serialization
 from flask import make_response, jsonify, current_app, request
 from flask_restful import Resource
 
-from util.authorization import make_access_token
+from util.authorization import make_access_token, read_keys
 
 
 class RefreshService(Resource):
@@ -43,23 +39,13 @@ class RefreshService(Resource):
 
 
 def decode_idtoken(token):
+    """
+    decodes the token
+    :param token:
+    :return:
+    """
     try:
-        response = requests.get("https://login.microsoftonline.com/common/discovery/keys")
-        keys = response.json()['keys']
-
-        token_headers = jwt.get_unverified_header(token)
-        token_alg = token_headers['alg']
-        token_kid = token_headers['kid']
-        public_key = None
-        for key in keys:
-            if key['kid'] == token_kid:
-                public_key = key
-
-        rsa_pem_key = jwt.algorithms.RSAAlgorithm.from_jwk(json.dumps(public_key))
-        rsa_pem_key_bytes = rsa_pem_key.public_bytes(
-            encoding=serialization.Encoding.PEM,
-            format=serialization.PublicFormat.SubjectPublicKeyInfo
-        )
+        [rsa_pem_key_bytes, token_alg] = read_keys(token)
 
         jwt.decode(
             token,

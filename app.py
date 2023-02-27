@@ -1,6 +1,6 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, send_from_directory
 from flask_cors import CORS
-from flask_restful import  Api
+from flask_restful import Api
 
 from service.RefreshService import RefreshService
 from service.EmailService import EmailService
@@ -14,8 +14,6 @@ from service.PeopleListService import PeoplelistService
 from service.PrintService import PrintService
 
 from logging.config import dictConfig
-
-
 
 app = Flask(__name__)
 CORS(app)
@@ -57,16 +55,14 @@ api.add_resource(PersonService, '/person')
 api.add_resource(PeoplelistService, '/people/<filter_name>', '/people/<filter_name>/<filter_role>')
 api.add_resource(EventService, '/event/<event_uuid>')
 api.add_resource(EventlistService, '/events', '/events/<date>')
-api.add_resource(EmailService, '/email', '/email/<exam_uuid>/<type>')
+api.add_resource(EmailService, '/email', '/email/<exam_uuid>/<template>')
 api.add_resource(PrintService, '/print', '/print/<exam_uuid>')
 
-@app.route('/')
-def home():
-   return render_template('index.html')
 
 @app.route('/output/<filename>')
 def page(filename):
     return send_from_directory('output', filename)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

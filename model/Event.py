@@ -1,7 +1,5 @@
 import json
 from dataclasses import dataclass
-from dateutil import parser
-import datetime as datetime
 
 
 @dataclass
@@ -13,11 +11,11 @@ class Event:
     """
 
     event_uuid: str
-    timestamp: datetime.datetime
+    timestamp: str
     rooms: list
     supervisors: list
 
-    def to_json(self):
+    def to_json(self) -> str:
         jstring = '{"event_uuid":"' + self.event_uuid + '",' + \
                   '"datetime": "' + self.timestamp + '",' + \
                   '"supervisors":' + json.dumps(self.supervisors) + ',' + \
@@ -25,35 +23,35 @@ class Event:
         return jstring
 
     @property
-    def event_uuid(self):
+    def event_uuid(self) -> str:
         return self._event_uuid
 
     @event_uuid.setter
-    def event_uuid(self, value):
+    def event_uuid(self, value) -> None:
         self._event_uuid = value
 
     @property
-    def timestamp(self):
+    def timestamp(self) -> str:
         return self._datetime
 
     @timestamp.setter
-    def timestamp(self, value):
+    def timestamp(self, value) -> None:
         self._datetime = value
 
     @property
-    def rooms(self):
+    def rooms(self) -> list[str]:
         return self._rooms
 
     @rooms.setter
-    def rooms(self, value):
+    def rooms(self, value) -> None:
         self._rooms = value
 
     @property
-    def supervisors(self):
+    def supervisors(self) -> list[str]:
         return self._supervisors
 
     @supervisors.setter
-    def supervisors(self, value):
+    def supervisors(self, value) -> None:
         self._supervisors = value
 
 

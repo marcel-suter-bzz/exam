@@ -119,6 +119,7 @@ class ExamService(Resource):
         exam_dao.save_exam(exam)
         return True
 
+
 if __name__ == '__main__':
     ''' Check if started directly '''
     pass

@@ -1,13 +1,10 @@
-import json
 from datetime import datetime, timedelta
 
 import jwt
-import requests
-from cryptography.hazmat.primitives import serialization
 from flask import make_response, jsonify, current_app as app, request
 from flask_restful import Resource, reqparse
 
-from util.authorization import make_access_token
+from util.authorization import make_access_token, read_keys
 
 parser = reqparse.RequestParser()
 parser.add_argument('email', location='form', help='email')
@@ -43,7 +40,7 @@ class AuthenticationService(Resource):
             app.logger.info("A valid token is missing!")
             return make_response(jsonify({"message": "A valid token is missing!"}), 401)
         try:
-            decoded_token = decode_idtoken(token[7:])
+            decoded_token = decode_id_token(token[7:])
             email = decoded_token['email']
             access, role = make_access_token(email)
 
@@ -68,29 +65,14 @@ class AuthenticationService(Resource):
             return make_response(jsonify({"message": "EXAM/login: Invalid token!"}), 401)
 
 
-def decode_idtoken(token):
+def decode_id_token(token):
     """
     decodes the id token from MSAL
     :param token:
     :return:
     """
     try:
-        response = requests.get("https://login.microsoftonline.com/common/discovery/keys")
-        keys = response.json()['keys']
-
-        token_headers = jwt.get_unverified_header(token)
-        token_alg = token_headers['alg']
-        token_kid = token_headers['kid']
-        public_key = None
-        for key in keys:
-            if key['kid'] == token_kid:
-                public_key = key
-
-        rsa_pem_key = jwt.algorithms.RSAAlgorithm.from_jwk(json.dumps(public_key))
-        rsa_pem_key_bytes = rsa_pem_key.public_bytes(
-            encoding=serialization.Encoding.PEM,
-            format=serialization.PublicFormat.SubjectPublicKeyInfo
-        )
+        [rsa_pem_key_bytes, token_alg] = read_keys(token)
 
         decoded_token = jwt.decode(
             token,
@@ -101,7 +83,7 @@ def decode_idtoken(token):
             issuer="https://login.microsoftonline.com/12ea5aa9-906c-4d84-86d2-4713c6ae66d3/v2.0"
         )
         return decoded_token
-    except Exception as e:
+    except Exception:
         app.logger.info("Error in jwt.decode")
         raise
 

@@ -4,7 +4,7 @@ from model.Person import Person
 import json
 
 
-def condition(person, filter_name, filter_role):
+def condition(person: Person, filter_name: str, filter_role: str) -> bool:
     """
     condition for filtering the examlist
     :param filter_role:
@@ -37,7 +37,7 @@ class PersonDAO:
         self._peopledict = {}
         self.load_people()
 
-    def filtered_list(self, filter_name, filter_role):
+    def filtered_list(self, filter_name: str, filter_role: str) -> list[Person]:
         """
         returns the filtered list of people
         :param filter_name: the filter for the name
@@ -51,7 +51,7 @@ class PersonDAO:
                 filtered.append(person)
         return filtered
 
-    def read_person(self, email):
+    def read_person(self, email: str) -> Person:
         """
         reads a person by its email
         :param email:
@@ -61,19 +61,19 @@ class PersonDAO:
 
             if key.casefold() == email.casefold():
                 return item
-        return  Person(
-                    email,
-                    '***Konto gelöscht***',
-                    email,
-                    'student'
-                )
+        return Person(
+            email,
+            '***Konto gelöscht***',
+            email,
+            'student'
+        )
 
-    def load_people(self):
+    def load_people(self) -> None:
         """
-                loads all exams into _examlist
-                :return: none
-                :rtype: none
-                """
+        loads all exams into _examlist
+        :return: none
+        :rtype: none
+        """
         file = open(current_app.config['DATAPATH'] + 'people.json', encoding='UTF-8')
         people = json.load(file)
         for item in people:

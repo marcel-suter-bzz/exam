@@ -1,4 +1,5 @@
 import json
+
 from dateutil import parser
 from flask import current_app
 
@@ -22,7 +23,7 @@ class EventDAO:
         self._eventdict = {}
         self.load_events()
 
-    def filtered_list(self, filter_value):
+    def filtered_list(self, filter_value: str) -> list[Event]:
         """
         returns the filtered list of events
         :param filter_value: the filter to be applied
@@ -39,7 +40,7 @@ class EventDAO:
                     break
         return filtered
 
-    def read_event(self, uuid):
+    def read_event(self, uuid: str) -> Event:
 
         """
         reads an event by its uuid
@@ -51,7 +52,7 @@ class EventDAO:
             return self._eventdict[uuid]
         return None
 
-    def load_events(self):
+    def load_events(self) -> None:
 
         """
         loads all events into _eventlist

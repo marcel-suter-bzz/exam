@@ -1,7 +1,7 @@
 import datetime
 
 
-def replace_text(data, text):
+def replace_text(data: dict, text: str) -> str:
     """
     replace a placeholder with data
     :param data:

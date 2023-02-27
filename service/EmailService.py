@@ -27,18 +27,18 @@ class EmailService(Resource):
 
     @token_required
     @teacher_required
-    def get(self, exam_uuid, type):
+    def get(self, exam_uuid, template):
         """
         sends an email
         :param exam_uuid: the unique key
-        :param type: the type of email to be sent
+        :param template: the template for the email
         :return: http response
         """
         exam_dao = ExamDAO()
         exam = exam_dao.read_exam(exam_uuid)
         http_status = 404
         if exam is not None:
-            self.create_email(exam, type)
+            create_email(exam, template)
             http_status = 200
         return make_response('email sent', http_status)
 
@@ -54,77 +54,81 @@ class EmailService(Resource):
         for exam_uuid in args['exam_uuid']:
             uuid = ''
             if isinstance(exam_uuid, list):
-                for c in exam_uuid:
-                    uuid += c
+                for item in exam_uuid:
+                    uuid += item
             else:
                 uuid = exam_uuid
             exam = exam_dao.read_exam(uuid)
             if exam is not None:
-                self.create_email(exam, 'invitation')
+                create_email(exam, 'invitation')
         return make_response('email sent', 200)
 
-    def create_email(self, exam, status):
-        """
-        creates an email for the selected exam and type
-        :param exam: the unique uuid for an exam
-        :param status: the type of email (missed, ...)
-        :return: successful
-        """
-        event_dao = EventDAO()
-        event = event_dao.read_event(exam.event_uuid)
-        person_dao = PersonDAO()
-        chief_supervisor = person_dao.read_person(event.supervisors[0])
-        filename = current_app.config['TEMPLATEPATH']
 
-        if status == '10':
-            filename += 'missed.txt'
-            sender = exam.teacher.email
-            subject = 'Verpasste Prüfung'
-        elif status == '20':
-            filename += 'missed2.txt'
-            sender = exam.teacher.email
-            subject = 'Verpasste Prüfung'
-        else:
-            filename += 'invitation.txt'
-            sender = chief_supervisor.email
-            subject = 'Aufgebot zur Nachprüfung'
-        file = open(filename, encoding='UTF-8')
-        text = file.read()
-        data = {'student.firstname': exam.student.firstname,
-                'student.lastname': exam.student.lastname,
-                'teacher.firstname': exam.teacher.firstname,
-                'teacher.lastname': exam.teacher.lastname,
-                'teacher.email': exam.teacher.email,
-                'chief_supervisor.firstname': chief_supervisor.firstname,
-                'chief_supervisor.lastname': chief_supervisor.lastname,
-                'chief_supervisor.email': chief_supervisor.email,
-                'missed': exam.missed,
-                'module': exam.module,
-                'event.date': f'{event.timestamp[8:10]}.{event.timestamp[5:7]}.{event.timestamp[0:4]}',
-                'event.time': f'{event.timestamp[14:19]}',
-                'room': exam.room,
-                'tools': exam.tools
-                }
-        text = replace_text(data, text)
-        self.send_email(sender, exam.student.email, subject, text)
-        return True
+def create_email(exam, status):
+    """
+    creates an email for the selected exam and type
+    :param exam: the unique uuid for an exam
+    :param status: the type of email (missed, ...)
+    :return: successful
+    """
+    event_dao = EventDAO()
+    event = event_dao.read_event(exam.event_uuid)
+    person_dao = PersonDAO()
+    chief_supervisor = person_dao.read_person(event.supervisors[0])
+    filename = current_app.config['TEMPLATEPATH']
 
-    def send_email(self, sender, recipient, subject, content):
-        """
-        sends an email
-        :param sender: email address of the sender
-        :param recipient:  email address of the recipient
-        :param subject: subject of the email
-        :param content: email text
-        :return: None
-        """
+    if status == '10':
+        filename += 'missed.txt'
+        sender = exam.teacher.email
+        subject = 'Verpasste Prüfung'
+    elif status == '20':
+        filename += 'missed2.txt'
+        sender = exam.teacher.email
+        subject = 'Verpasste Prüfung'
+    else:
+        filename += 'invitation.txt'
+        sender = chief_supervisor.email
+        subject = 'Aufgebot zur Nachprüfung'
+    file = open(filename, encoding='UTF-8')
+    text = file.read()
+    data = {'student.firstname': exam.student.firstname,
+            'student.lastname': exam.student.lastname,
+            'teacher.firstname': exam.teacher.firstname,
+            'teacher.lastname': exam.teacher.lastname,
+            'teacher.email': exam.teacher.email,
+            'chief_supervisor.firstname': chief_supervisor.firstname,
+            'chief_supervisor.lastname': chief_supervisor.lastname,
+            'chief_supervisor.email': chief_supervisor.email,
+            'missed': exam.missed,
+            'module': exam.module,
+            'event.date': f'{event.timestamp[8:10]}.{event.timestamp[5:7]}.{event.timestamp[0:4]}',
+            'event.time': f'{event.timestamp[14:19]}',
+            'room': exam.room,
+            'tools': exam.tools
+            }
+    text = replace_text(data, text)
+    send_email(sender, exam.student.email, subject, text)
+    return True
 
-        mail = Mail(current_app)
-        msg = Message(subject, sender=sender, recipients=[recipient], reply_to=sender)
-        msg.body = content
-        mail.send(msg)
-        '''
-        print ('From: ' + sender)
-        print ('To:' + recipient)
-        print (content)
-        '''
+
+def send_email(sender, recipient, subject, content):
+    """
+    sends an email
+    :param sender: email address of the sender
+    :param recipient:  email address of the recipient
+    :param subject: subject of the email
+    :param content: email text
+    :return: None
+    """
+
+    mail = Mail(current_app)
+    msg = Message(
+        subject=subject,
+        sender=sender,
+        recipients=[recipient],
+        reply_to=sender,
+        cc=sender
+    )
+    msg.body = content
+    mail.send(msg)
+

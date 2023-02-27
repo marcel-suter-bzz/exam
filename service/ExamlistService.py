@@ -37,7 +37,7 @@ class ExamlistService(Resource):
             args['student'] = g.user.email
             args['teacher'] = ''
             args['date'] = ''
-            args['status'] = '' 
+            args['status'] = ''
 
         exam_dao = ExamDAO()
         examlist = exam_dao.filtered_list(args['student'], args['teacher'], args['date'], args['status'])
@@ -54,7 +54,6 @@ class ExamlistService(Resource):
             return make_response(
                 '[]', 404
             )
-
 
 
 if __name__ == '__main__':

@@ -4,10 +4,9 @@ from flask import current_app
 
 from data.PersonDAO import PersonDAO
 from model.Exam import Exam
-from model.Person import Person
 
 
-def condition(exam, student, teacher, date, status):
+def condition(exam: Exam, student: str, teacher: str, date: str, status: str) -> bool:
     """
     condition for filtering the examlist
     :param exam: an exam object to be examined
@@ -58,7 +57,7 @@ class ExamDAO:
         self._examdict = {}
         self.load_exams()
 
-    def filtered_list(self, student, teacher, date, status):
+    def filtered_list(self, student: str, teacher: str, date: str, status: str) -> list[Exam]:
         """
         returns the filtered list of exams
         :param student
@@ -76,7 +75,7 @@ class ExamDAO:
                     break
         return filtered
 
-    def read_exam(self, uuid):
+    def read_exam(self, uuid: str) -> Exam:
         """
         reads an exam by its uuid
         :param uuid: the unique key
@@ -87,7 +86,7 @@ class ExamDAO:
             return self._examdict[uuid]
         return None
 
-    def save_exam(self, exam):
+    def save_exam(self, exam: Exam) -> None:
         """
         saves a new or changed exam
         :param exam:
@@ -132,7 +131,7 @@ class ExamDAO:
         file.write(exams_json)
         file.close()
 
-    def load_exams(self):
+    def load_exams(self) -> None:
         """
         loads all exams into _examlist
         :return: none
