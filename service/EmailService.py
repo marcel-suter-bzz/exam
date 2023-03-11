@@ -127,7 +127,7 @@ def send_email(sender, recipient, subject, content):
         sender=sender,
         recipients=[recipient],
         reply_to=sender,
-        cc=sender
+        cc=[sender]
     )
     msg.body = content
     mail.send(msg)
