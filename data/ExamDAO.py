@@ -1,4 +1,5 @@
 import json
+from typing import List
 
 from flask import current_app
 
@@ -57,7 +58,7 @@ class ExamDAO:
         self._examdict = {}
         self.load_exams()
 
-    def filtered_list(self, student: str, teacher: str, date: str, status: str) -> list[Exam]:
+    def filtered_list(self, student: str, teacher: str, date: str, status: str) -> List[Exam]:
         """
         returns the filtered list of exams
         :param student

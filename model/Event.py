@@ -1,5 +1,6 @@
 import json
 from dataclasses import dataclass
+from typing import List
 
 
 @dataclass
@@ -39,7 +40,7 @@ class Event:
         self._datetime = value
 
     @property
-    def rooms(self) -> list[str]:
+    def rooms(self) -> List[str]:
         return self._rooms
 
     @rooms.setter
@@ -47,7 +48,7 @@ class Event:
         self._rooms = value
 
     @property
-    def supervisors(self) -> list[str]:
+    def supervisors(self) -> List[str]:
         return self._supervisors
 
     @supervisors.setter

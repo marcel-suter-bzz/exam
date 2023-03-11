@@ -1,4 +1,5 @@
 import json
+from typing import List
 
 from dateutil import parser
 from flask import current_app
@@ -23,7 +24,7 @@ class EventDAO:
         self._eventdict = {}
         self.load_events()
 
-    def filtered_list(self, filter_value: str) -> list[Event]:
+    def filtered_list(self, filter_value: str) -> List[Event]:
         """
         returns the filtered list of events
         :param filter_value: the filter to be applied

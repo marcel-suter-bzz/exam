@@ -1,3 +1,5 @@
+from typing import List
+
 from flask import current_app
 
 from model.Person import Person
@@ -37,7 +39,7 @@ class PersonDAO:
         self._peopledict = {}
         self.load_people()
 
-    def filtered_list(self, filter_name: str, filter_role: str) -> list[Person]:
+    def filtered_list(self, filter_name: str, filter_role: str) -> List[Person]:
         """
         returns the filtered list of people
         :param filter_name: the filter for the name
