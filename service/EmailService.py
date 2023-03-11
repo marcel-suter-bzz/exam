@@ -124,10 +124,10 @@ def send_email(sender, recipient, subject, content):
     mail = Mail(current_app)
     msg = Message(
         subject=subject,
-        sender=sender,
+        sender=current_app.config['MAIL_USERNAME'],
         recipients=[recipient],
         reply_to=sender,
-        cc=sender
+        cc=[sender]
     )
     msg.body = content
     mail.send(msg)
