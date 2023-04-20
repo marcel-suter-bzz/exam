@@ -1,2 +1,2 @@
 # exam
-Manage exams for students who missed the orginal date
+This repository was retired. Future development will be under https://github.com/ghwalin/exam_api.git
